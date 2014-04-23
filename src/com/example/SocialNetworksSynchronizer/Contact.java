@@ -1,5 +1,9 @@
 package com.example.SocialNetworksSynchronizer;
 
+//Данный класс представляет собой контакт в социальной сети(ВК или FB). Имеет множество полей и методов для доступа к ним
+//Одно поле для ВК может иметь значение, тогда как для FB нет, как в случае с номером телефона (mobilePhone или homePhone)
+
+
 public class Contact {
     private String name = "";
     private String mobilePhone = "";

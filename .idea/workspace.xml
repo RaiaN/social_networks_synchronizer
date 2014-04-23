@@ -70,23 +70,7 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" line="375" class="com.example.SocialNetworksSynchronizer.MainActivity$11" package="com.example.SocialNetworksSynchronizer">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -99,26 +83,55 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="373" column="11" selection-start="13989" selection-end="13989" vertical-scroll-proportion="0.33243242" vertical-offset="5912" max-vertical-offset="6800">
+            <state line="470" column="40" selection-start="20578" selection-end="20578" vertical-scroll-proportion="4.2802014" vertical-offset="5439" max-vertical-offset="8126">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1188#1197#0" expanded="true" />
-                <element signature="e#1250#1258#0" expanded="true" />
-                <element signature="e#1319#1328#0" expanded="true" />
-                <element signature="e#1395#1408#0" expanded="true" />
-                <element signature="e#2233#2402#0" expanded="true" />
-                <element signature="e#2391#2392#0" expanded="true" />
-                <element signature="e#4385#4610#0" expanded="true" />
-                <element signature="e#4599#4600#0" expanded="true" />
-                <element signature="e#6509#6517#0" expanded="true" />
-                <element signature="e#6973#8811#0" expanded="true" />
-                <element signature="e#8800#8801#0" expanded="true" />
-                <element signature="e#11446#11454#0" expanded="true" />
-                <element signature="e#11578#12208#0" expanded="true" />
-                <element signature="e#12197#12198#0" expanded="true" />
-                <element signature="e#14141#14149#0" expanded="true" />
-                <element signature="e#14791#14792#0" expanded="true" />
+                <element signature="e#1388#1397#0" expanded="true" />
+                <element signature="e#1628#1636#0" expanded="true" />
+                <element signature="e#1752#1761#0" expanded="true" />
+                <element signature="e#1828#1841#0" expanded="true" />
+                <element signature="e#2314#2457#0" expanded="true" />
+                <element signature="e#2446#2447#0" expanded="true" />
+                <element signature="e#2575#2744#0" expanded="true" />
+                <element signature="e#2733#2734#0" expanded="true" />
+                <element signature="e#2862#3031#0" expanded="true" />
+                <element signature="e#3020#3021#0" expanded="true" />
+                <element signature="e#3162#3314#0" expanded="true" />
+                <element signature="e#3303#3304#0" expanded="true" />
+                <element signature="e#3429#3606#0" expanded="true" />
+                <element signature="e#3595#3596#0" expanded="true" />
+                <element signature="e#5435#5660#0" expanded="true" />
+                <element signature="e#5649#5650#0" expanded="true" />
+                <element signature="e#7974#7982#0" expanded="true" />
+                <element signature="e#8554#11311#0" expanded="true" />
+                <element signature="e#11300#11301#0" expanded="true" />
+                <element signature="e#15260#15268#0" expanded="true" />
+                <element signature="e#15517#16402#0" expanded="true" />
+                <element signature="e#16391#16392#0" expanded="true" />
+                <element signature="e#18476#19338#0" expanded="true" />
+                <element signature="e#18677#18685#0" expanded="true" />
+                <element signature="e#19327#19328#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SyncContact.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContact.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="22" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="748">
+              <folding>
+                <element signature="method#getFbName#0;class#SyncContact#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FriendInfoActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FriendInfoActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="0" selection-start="1240" selection-end="1240" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,14 +167,14 @@
         <option value="$PROJECT_DIR$/res/layout/window_title.xml" />
         <option value="$PROJECT_DIR$/res/values/custom_title.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FriendInfoActivity.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/VkContact.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactItem.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FbContact.java" />
-        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Contact.java" />
-        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContact.java" />
-        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContact.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FriendInfoActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Contact.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java" />
       </list>
     </option>
   </component>
@@ -319,12 +332,12 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="project.propCompiler" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/facebook_sdk" />
+    <property name="last_opened_file_path" value="C:/Program Files (x86)/Git" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -550,7 +563,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34876543" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34876543" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -718,7 +731,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gen/com/example/SocialNetworksSynchronizer/R.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="622" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="622">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../facebook-android-sdk-3.8.0/samples/Scrumptious/src/com/facebook/scrumptious/MainActivity.java">
@@ -735,7 +750,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/model/GraphLocation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="17" selection-start="855" selection-end="855" vertical-scroll-proportion="-1.8273616" vertical-offset="731" max-vertical-offset="2074" />
+        <state line="24" column="17" selection-start="855" selection-end="855" vertical-scroll-proportion="-1.8273616" vertical-offset="731" max-vertical-offset="2074">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/model/GraphUser.java">
@@ -852,41 +869,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Contact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="32" selection-start="206" selection-end="206" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="9" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.5427873" vertical-offset="203" max-vertical-offset="612">
-          <folding>
-            <element signature="method#getFbName#0;class#SyncContact#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="73" selection-start="756" selection-end="756" vertical-scroll-proportion="0.29095355" vertical-offset="306" max-vertical-offset="765">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/Request.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="282" column="26" selection-start="12961" selection-end="12961" vertical-scroll-proportion="0.86422974" vertical-offset="3834" max-vertical-offset="39848">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FriendInfoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="44" selection-start="1283" selection-end="1283" vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="646">
           <folding />
         </state>
       </provider>
@@ -914,27 +899,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Contact.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="373" column="11" selection-start="13989" selection-end="13989" vertical-scroll-proportion="0.33243242" vertical-offset="5912" max-vertical-offset="6800">
+        <state line="22" column="0" selection-start="740" selection-end="740" vertical-scroll-proportion="0.53536975" vertical-offset="41" max-vertical-offset="663">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="43" selection-start="1940" selection-end="1940" vertical-scroll-proportion="1.1205788" vertical-offset="0" max-vertical-offset="935">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1188#1197#0" expanded="true" />
-            <element signature="e#1250#1258#0" expanded="true" />
-            <element signature="e#1319#1328#0" expanded="true" />
-            <element signature="e#1395#1408#0" expanded="true" />
-            <element signature="e#2233#2402#0" expanded="true" />
-            <element signature="e#2391#2392#0" expanded="true" />
-            <element signature="e#4385#4610#0" expanded="true" />
-            <element signature="e#4599#4600#0" expanded="true" />
-            <element signature="e#6509#6517#0" expanded="true" />
-            <element signature="e#6973#8811#0" expanded="true" />
-            <element signature="e#8800#8801#0" expanded="true" />
-            <element signature="e#11446#11454#0" expanded="true" />
-            <element signature="e#11578#12208#0" expanded="true" />
-            <element signature="e#12197#12198#0" expanded="true" />
-            <element signature="e#14141#14149#0" expanded="true" />
-            <element signature="e#14791#14792#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FriendInfoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="1240" selection-end="1240" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContact.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="22" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+          <folding>
+            <element signature="method#getFbName#0;class#SyncContact#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="470" column="40" selection-start="20578" selection-end="20578" vertical-scroll-proportion="4.2802014" vertical-offset="5439" max-vertical-offset="8126">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1388#1397#0" expanded="true" />
+            <element signature="e#1628#1636#0" expanded="true" />
+            <element signature="e#1752#1761#0" expanded="true" />
+            <element signature="e#1828#1841#0" expanded="true" />
+            <element signature="e#2314#2457#0" expanded="true" />
+            <element signature="e#2446#2447#0" expanded="true" />
+            <element signature="e#2575#2744#0" expanded="true" />
+            <element signature="e#2733#2734#0" expanded="true" />
+            <element signature="e#2862#3031#0" expanded="true" />
+            <element signature="e#3020#3021#0" expanded="true" />
+            <element signature="e#3162#3314#0" expanded="true" />
+            <element signature="e#3303#3304#0" expanded="true" />
+            <element signature="e#3429#3606#0" expanded="true" />
+            <element signature="e#3595#3596#0" expanded="true" />
+            <element signature="e#5435#5660#0" expanded="true" />
+            <element signature="e#5649#5650#0" expanded="true" />
+            <element signature="e#7974#7982#0" expanded="true" />
+            <element signature="e#8554#11311#0" expanded="true" />
+            <element signature="e#11300#11301#0" expanded="true" />
+            <element signature="e#15260#15268#0" expanded="true" />
+            <element signature="e#15517#16402#0" expanded="true" />
+            <element signature="e#16391#16392#0" expanded="true" />
+            <element signature="e#18476#19338#0" expanded="true" />
+            <element signature="e#18677#18685#0" expanded="true" />
+            <element signature="e#19327#19328#0" expanded="true" />
           </folding>
         </state>
       </provider>
