@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_id">1416447705289612</string>
+    <string name="app_name">SocialNetworksSynchronizer</string>
+    <string name="vk">Vkontakte</string>
+    <string name="fb">Facebook</string>
+    <string name="ok">Odnoklassniki</string>
+    <string name="logout">Exit</string>
+    <string name="sync">Sync</string>
+    <string name="back_button">Вернуться</string>
+    <string name="phonebook_icon">Phonebook icon</string>
+    <string name="vk_icon">Vkontakte icon</string>
+    <string name="fb_icon">Facebook icon</string>
+    <string name="vk_friends">VK friends</string>
+    <string name="fb_friends">FB friends</string>
+    <string name="phonebook">Phonebook</string>
+</resources>

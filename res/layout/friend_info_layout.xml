@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+            android:id="@+id/friend_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:background="@drawable/rect">
+    </TextView>
+    <TextView
+            android:id="@+id/friend_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/friend_name"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:background="@drawable/rect">
+    </TextView>
+    <TextView
+            android:id="@+id/friend_contacts"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/friend_address"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:background="@drawable/rect">
+    </TextView>
+    <Button
+            android:id="@+id/back_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/back_button">
+    </Button>
+</RelativeLayout>

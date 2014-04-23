@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+        <ListView
+                android:id="@+id/lv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_above="@+id/buttons_layout"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="6.0sp">
+        </ListView>
+
+        <LinearLayout
+                android:id="@+id/buttons_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true">
+
+            <Button
+                    android:id="@+id/sync_button"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dip"
+                    android:layout_marginRight="0dip"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/btn"
+                    android:text="@string/sync"
+                    android:textSize="10sp">
+            </Button>
+
+            <Button
+                    android:id="@+id/vk_friends_button"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dip"
+                    android:layout_marginRight="0dip"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/btn"
+                    android:text="@string/vk_friends"
+                    android:textSize="10sp">
+            </Button>
+
+            <Button
+                    android:id="@+id/fb_friends_button"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dip"
+                    android:layout_marginRight="0dip"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/btn"
+                    android:text="@string/fb_friends"
+                    android:textSize="10sp">
+            </Button>
+
+            <Button
+                    android:id="@+id/phonebook_button"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dip"
+                    android:layout_marginRight="0dip"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/btn"
+                    android:text="@string/phonebook"
+                    android:textSize="10sp">
+            </Button>
+
+            <Button
+                    android:id="@+id/logout"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dip"
+                    android:layout_marginRight="0dip"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/btn"
+                    android:text="@string/logout"
+                    android:textSize="10sp">
+            </Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

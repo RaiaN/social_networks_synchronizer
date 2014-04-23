@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SocialNetworksSynchronizer.iml" filepath="$PROJECT_DIR$/SocialNetworksSynchronizer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook_sdk/facebook_sdk.iml" filepath="$PROJECT_DIR$/libs/facebook_sdk/facebook_sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/vksdk_library/src/main/vksdk.iml" filepath="$PROJECT_DIR$/libs/vksdk_library/src/main/vksdk.iml" />
+    </modules>
+  </component>
+</project>
+
