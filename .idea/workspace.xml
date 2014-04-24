@@ -83,37 +83,27 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="361" column="49" selection-start="15475" selection-end="15475" vertical-scroll-proportion="0.33170733" vertical-offset="5474" max-vertical-offset="7854">
+            <state line="262" column="29" selection-start="10198" selection-end="10198" vertical-scroll-proportion="0.4950495" vertical-offset="3778" max-vertical-offset="5066">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1484#1493#0" expanded="true" />
-                <element signature="e#1731#1740#0" expanded="true" />
-                <element signature="e#1807#1820#0" expanded="true" />
-                <element signature="e#7983#7991#0" expanded="true" />
-                <element signature="e#12484#12492#0" expanded="true" />
-                <element signature="e#15328#15336#0" expanded="true" />
-                <element signature="e#18757#18765#0" expanded="true" />
-                <element signature="e#19749#19757#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Contact.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Contact.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="11" selection-start="516" selection-end="516" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="748">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContactArrayAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="43" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.0" vertical-offset="321" max-vertical-offset="935">
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1305#1314#0" expanded="true" />
+                <element signature="e#1374#1383#0" expanded="true" />
+                <element signature="e#1451#1464#0" expanded="true" />
+                <element signature="e#6709#7501#0" expanded="true" />
+                <element signature="e#6977#7475#0" expanded="true" />
+                <element signature="e#7456#7457#0" expanded="true" />
+                <element signature="e#7490#7491#0" expanded="true" />
+                <element signature="e#7654#7662#0" expanded="true" />
+                <element signature="e#8258#8266#0" expanded="true" />
+                <element signature="e#8515#9470#0" expanded="true" />
+                <element signature="e#9459#9460#0" expanded="true" />
+                <element signature="e#9885#10380#0" expanded="true" />
+                <element signature="e#10335#10336#0" expanded="true" />
+                <element signature="e#10369#10370#0" expanded="true" />
+                <element signature="e#10676#11171#0" expanded="true" />
+                <element signature="e#10943#11145#0" expanded="true" />
+                <element signature="e#11126#11127#0" expanded="true" />
+                <element signature="e#11160#11161#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -157,6 +147,14 @@
         <option value="$PROJECT_DIR$/res/layout/friend_info_layout.xml" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FriendInfoActivity.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Contact.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Requests.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FbRequestTask.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Phonebook.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/VkRequestTask.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FbRequestThread.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/VkRequestThread.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContactsTask.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContactsThread.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" />
       </list>
     </option>
@@ -304,8 +302,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -327,7 +325,7 @@
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.SHOW" value="true" />
-    <property name="SearchEverywhereHistory" value="&#10;&quot;&#10;_&#10;List" />
+    <property name="SearchEverywhereHistory" value="(&#10;F&#10;whi&#10;&quot;&#10;_&#10;List" />
     <property name="FullScreen" value="false" />
     <property name="last.edited.regexp" value="Sample Text" />
   </component>
@@ -366,19 +364,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -404,6 +389,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -541,10 +539,8 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32932332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34876543" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -552,7 +548,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3271605" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33641976" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -563,6 +559,8 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32932332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -587,79 +585,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="4" selection-start="55" selection-end="93" vertical-scroll-proportion="0.075723834" vertical-offset="0" max-vertical-offset="449">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/ListView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="16" selection-start="1485" selection-end="1485" vertical-scroll-proportion="0.3324937" vertical-offset="463" max-vertical-offset="2278" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/org/json/JSONArray.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="28" selection-start="3659" selection-end="3659" vertical-scroll-proportion="0.33333334" vertical-offset="1341" max-vertical-offset="1717" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/java/com/vk/sdk/api/VKApiConst.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="13" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.3278237" vertical-offset="0" max-vertical-offset="1768">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/java/com/vk/sdk/api/VKResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="13" selection-start="1234" selection-end="1234" vertical-scroll-proportion="0.33333334" vertical-offset="32" max-vertical-offset="493" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/java/lang/String.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="0" selection-start="6340" selection-end="6340" vertical-scroll-proportion="0.47714287" vertical-offset="2536" max-vertical-offset="3145" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="27" selection-start="78" selection-end="78" vertical-scroll-proportion="0.05466238" vertical-offset="0" max-vertical-offset="622">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable/fb_icon.PNG">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable/contact_icon.PNG">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="622" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.7356322" vertical-offset="1057" max-vertical-offset="1666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ant.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/content/ContentResolver.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="41" selection-start="2139" selection-end="2139" vertical-scroll-proportion="0.3324937" vertical-offset="548" max-vertical-offset="2771" />
-      </provider>
-    </entry>
     <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/provider/ContactsContract.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="812" column="0" selection-start="44225" selection-end="44225" vertical-scroll-proportion="0.0" vertical-offset="13671" max-vertical-offset="15317" />
@@ -673,13 +598,6 @@
     <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/java/util/Queue.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="0" selection-start="280" selection-end="280" vertical-scroll-proportion="0.5390244" vertical-offset="0" max-vertical-offset="410" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/java/com/vk/sdk/api/VKRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="503" column="0" selection-start="17351" selection-end="17351" vertical-scroll-proportion="0.0" vertical-offset="7240" max-vertical-offset="8551">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/ArrayAdapter.class">
@@ -715,9 +633,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/model/GraphUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="24" selection-start="3223" selection-end="3236" vertical-scroll-proportion="0.8306189" vertical-offset="1496" max-vertical-offset="1972">
-          <folding />
-        </state>
+        <state line="117" column="24" selection-start="3223" selection-end="3236" vertical-scroll-proportion="0.8306189" vertical-offset="1496" max-vertical-offset="1972" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/phonebook_contact.xml">
@@ -799,9 +715,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/internal/Utility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="194" column="25" selection-start="6767" selection-end="6767" vertical-scroll-proportion="0.33170733" vertical-offset="2465" max-vertical-offset="7327">
-          <folding />
-        </state>
+        <state line="194" column="25" selection-start="6767" selection-end="6767" vertical-scroll-proportion="0.33170733" vertical-offset="2465" max-vertical-offset="7327" />
       </provider>
     </entry>
     <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/provider/SyncStateContract.class">
@@ -821,32 +735,12 @@
     </entry>
     <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/os/Handler.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="16" selection-start="564" selection-end="564" vertical-scroll-proportion="0.33333334" vertical-offset="140" max-vertical-offset="1411">
-          <folding />
-        </state>
+        <state line="17" column="16" selection-start="564" selection-end="564" vertical-scroll-proportion="0.33333334" vertical-offset="140" max-vertical-offset="1411" />
       </provider>
     </entry>
     <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/view/View.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="20196">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="22" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
-          <folding>
-            <element signature="method#getFbName#0;class#SyncContact#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/app/Activity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="16" selection-start="2638" selection-end="2638" vertical-scroll-proportion="-0.20104438" vertical-offset="1131" max-vertical-offset="7565">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="20196" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/java/com/vk/sdk/VKSdk.java">
@@ -858,23 +752,12 @@
     </entry>
     <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/java/util/List.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="156" selection-end="156" vertical-scroll-proportion="0.21464646" vertical-offset="0" max-vertical-offset="1037">
-          <folding />
-        </state>
+        <state line="6" column="17" selection-start="156" selection-end="156" vertical-scroll-proportion="0.21464646" vertical-offset="0" max-vertical-offset="1037" />
       </provider>
     </entry>
     <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/os/Bundle.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="159" selection-end="159" vertical-scroll-proportion="0.22193211" vertical-offset="0" max-vertical-offset="3298">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="359" column="26" selection-start="16619" selection-end="16619" vertical-scroll-proportion="0.33159268" vertical-offset="5296" max-vertical-offset="39848">
-          <folding />
-        </state>
+        <state line="6" column="19" selection-start="159" selection-end="159" vertical-scroll-proportion="0.22193211" vertical-offset="0" max-vertical-offset="3298" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/friend_info_layout.xml">
@@ -884,7 +767,7 @@
       <provider editor-type-id="text-editor">
         <state line="42" column="33" selection-start="1692" selection-end="1692" vertical-scroll-proportion="0.0" vertical-offset="406" max-vertical-offset="1003">
           <folding>
-            <element signature="e#1986#2007#0" expanded="true" />
+            <element signature="e#1986#2007#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -901,9 +784,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="43" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.0" vertical-offset="321" max-vertical-offset="935">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -916,31 +797,174 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/java/com/vk/sdk/VKUIHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="23" selection-start="1813" selection-end="1813" vertical-scroll-proportion="-0.28536585" vertical-offset="559" max-vertical-offset="969">
+        <state line="48" column="23" selection-start="1813" selection-end="1813" vertical-scroll-proportion="-0.28536585" vertical-offset="559" max-vertical-offset="969" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/RequestAsyncTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="47" selection-start="1165" selection-end="1174" vertical-scroll-proportion="0.3482309" vertical-offset="0" max-vertical-offset="2839">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/ListView.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="13" selection-start="196" selection-end="196" vertical-scroll-proportion="0.19465649" vertical-offset="0" max-vertical-offset="2278">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/os/AsyncTask.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="62" selection-start="1458" selection-end="1458" vertical-scroll-proportion="0.33206108" vertical-offset="387" max-vertical-offset="952">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Contact.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="11" selection-start="516" selection-end="516" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="748">
+        <state line="6" column="13" selection-start="309" selection-end="309" vertical-scroll-proportion="0.18994413" vertical-offset="0" max-vertical-offset="748">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/java/com/vk/sdk/VKObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="13" selection-start="1209" selection-end="1209" vertical-scroll-proportion="0.18994413" vertical-offset="0" max-vertical-offset="935">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/java/com/vk/sdk/api/VKRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="39" selection-start="2085" selection-end="2093" vertical-scroll-proportion="-14.638734" vertical-offset="8014" max-vertical-offset="8551">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/internal/Validate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="23" selection-start="956" selection-end="956" vertical-scroll-proportion="0.33333334" vertical-offset="25" max-vertical-offset="1309">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/facebook_sdk/src/com/facebook/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1653" column="48" selection-start="74591" selection-end="74591" vertical-scroll-proportion="0.33206108" vertical-offset="26414" max-vertical-offset="39848">
+          <folding>
+            <element signature="e#74868#74894#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/java/lang/Object.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="22" selection-start="727" selection-end="727" vertical-scroll-proportion="0.6517691" vertical-offset="58" max-vertical-offset="595">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/java/lang/Runnable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="156" selection-end="156" vertical-scroll-proportion="0.15828678" vertical-offset="0" max-vertical-offset="537">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Phonebook.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="28" selection-start="324" selection-end="324" vertical-scroll-proportion="-0.011254019" vertical-offset="228" max-vertical-offset="850">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1212#1220#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContact.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="16" selection-start="755" selection-end="755" vertical-scroll-proportion="0.6010101" vertical-offset="153" max-vertical-offset="748">
+          <folding>
+            <element signature="method#getFbName#0;class#SyncContact#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Requests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="33" selection-start="705" selection-end="705" vertical-scroll-proportion="0.5151515" vertical-offset="153" max-vertical-offset="833">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1214#1222#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FbRequestThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="32" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0" vertical-offset="565" max-vertical-offset="969">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/VkRequestThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="4" selection-start="380" selection-end="380" vertical-scroll-proportion="-3.25" vertical-offset="1551" max-vertical-offset="1955">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/java/lang/Thread.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="25" selection-start="2666" selection-end="2666" vertical-scroll-proportion="0.33168316" vertical-offset="1090" max-vertical-offset="2601">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/app/Activity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="29" selection-start="4252" selection-end="4252" vertical-scroll-proportion="0.33248082" vertical-offset="1774" max-vertical-offset="7565">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContactsThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="0" selection-start="2240" selection-end="2240" vertical-scroll-proportion="0.4950495" vertical-offset="752" max-vertical-offset="1768">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="361" column="49" selection-start="15475" selection-end="15475" vertical-scroll-proportion="0.33170733" vertical-offset="5474" max-vertical-offset="7854">
+        <state line="262" column="29" selection-start="10198" selection-end="10198" vertical-scroll-proportion="0.4950495" vertical-offset="3778" max-vertical-offset="5066">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1484#1493#0" expanded="true" />
-            <element signature="e#1731#1740#0" expanded="true" />
-            <element signature="e#1807#1820#0" expanded="true" />
-            <element signature="e#7983#7991#0" expanded="true" />
-            <element signature="e#12484#12492#0" expanded="true" />
-            <element signature="e#15328#15336#0" expanded="true" />
-            <element signature="e#18757#18765#0" expanded="true" />
-            <element signature="e#19749#19757#0" expanded="true" />
+            <element signature="e#1305#1314#0" expanded="true" />
+            <element signature="e#1374#1383#0" expanded="true" />
+            <element signature="e#1451#1464#0" expanded="true" />
+            <element signature="e#6709#7501#0" expanded="true" />
+            <element signature="e#6977#7475#0" expanded="true" />
+            <element signature="e#7456#7457#0" expanded="true" />
+            <element signature="e#7490#7491#0" expanded="true" />
+            <element signature="e#7654#7662#0" expanded="true" />
+            <element signature="e#8258#8266#0" expanded="true" />
+            <element signature="e#8515#9470#0" expanded="true" />
+            <element signature="e#9459#9460#0" expanded="true" />
+            <element signature="e#9885#10380#0" expanded="true" />
+            <element signature="e#10335#10336#0" expanded="true" />
+            <element signature="e#10369#10370#0" expanded="true" />
+            <element signature="e#10676#11171#0" expanded="true" />
+            <element signature="e#10943#11145#0" expanded="true" />
+            <element signature="e#11126#11127#0" expanded="true" />
+            <element signature="e#11160#11161#0" expanded="true" />
           </folding>
         </state>
       </provider>
