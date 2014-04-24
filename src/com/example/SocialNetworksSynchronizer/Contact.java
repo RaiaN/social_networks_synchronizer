@@ -5,10 +5,11 @@ package com.example.SocialNetworksSynchronizer;
 
 
 public class Contact {
-    private String name = "";
+    private String name        = "";
     private String mobilePhone = "";
-    private String homePhone = "";
-    private String address = "";
+    private String homePhone   = "";
+    private String address     = "";
+    private String email       = "";
 
     public Contact(String[] contactInfo) {
         if( contactInfo.length == 4 ) {
@@ -16,8 +17,10 @@ public class Contact {
             mobilePhone = contactInfo[1];
             homePhone   = contactInfo[2];
             address     = contactInfo[3];
-        } else {
-
+        } else if( contactInfo.length == 3 ) {
+            name = contactInfo[0];
+            address = contactInfo[1];
+            email = contactInfo[2];
         }
     }
 
@@ -33,6 +36,9 @@ public class Contact {
     public void setAddress(String address) {
         this.address = address;
     }
+    public void setEmail(String address) {
+        this.email = email;
+    }
 
     public String getName() {
         return name;
@@ -46,4 +52,5 @@ public class Contact {
     public String getAddress() {
         return address;
     }
+    public String getEmail() { return email; }
 }

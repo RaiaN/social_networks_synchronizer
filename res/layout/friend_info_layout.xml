@@ -33,6 +33,17 @@
             android:padding="4dp"
             android:background="@drawable/rect">
     </TextView>
+    <TextView
+            android:id="@+id/friend_email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/friend_contacts"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:background="@drawable/rect">
+    </TextView>
+
     <Button
             android:id="@+id/back_button"
             android:layout_width="fill_parent"

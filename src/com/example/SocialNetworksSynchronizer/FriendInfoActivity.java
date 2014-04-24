@@ -21,6 +21,7 @@ public class FriendInfoActivity extends Activity {
         tvs.add((TextView)findViewById(R.id.friend_name));    //добавляем 3 TextView в один список для удобства
         tvs.add((TextView)findViewById(R.id.friend_contacts));
         tvs.add((TextView)findViewById(R.id.friend_address));
+        tvs.add((TextView)findViewById(R.id.friend_email));
 
         final Button backButton = (Button)findViewById(R.id.back_button);  //кнопка Назад
         backButton.setOnClickListener(new View.OnClickListener() {
