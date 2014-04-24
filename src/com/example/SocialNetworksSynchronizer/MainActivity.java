@@ -4,20 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
 import com.facebook.*;
-import com.facebook.model.GraphLocation;
-import com.facebook.model.GraphMultiResult;
-import com.facebook.model.GraphUser;
 import com.vk.sdk.*;
 import com.vk.sdk.api.*;
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.*;
 
@@ -36,13 +31,16 @@ public class MainActivity extends FragmentActivity {
             "address",
             "email"
     };
-    private final String localeRus = "ru"; //Задать локаль для запросов в ВК, то есть все ответы вернутся кириллицей
-    private final String localeEng = "en";
 
-    private ArrayList<Contact> vkFriends = new ArrayList<Contact>(); //Список друзей ВК, который всегда обновляется
-                                                                     //в ходе синхронизации, или при нажатии на кнопку Vk Friends
+    Phonebook phonebook = new Phonebook(this);
 
+    VkRequestThread vkThread = null;
+    FbRequestThread fbThread = null;
+    SyncContactsThread scThread = null;
+
+    private ArrayList<Contact> vkFriends = new ArrayList<Contact>();
     private ArrayList<Contact> fbFriends = new ArrayList<Contact>();
+
     private ArrayList<SyncContact> syncContacts = new ArrayList<SyncContact>();   //SyncContact.java, синхронизированный список друзей
 
     @Override
@@ -174,184 +172,50 @@ public class MainActivity extends FragmentActivity {
         }
     };
 
-
-    //функция формирования запроса для получения информации о друзьях в ВК
-    //возвращает сформированный запрос
-    private VKRequest getFriendsRequest(String locale){
-        VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.USER_IDS, "",
-                                                                    "order", "name",
-                                                                    VKApiConst.FIELDS, "city,country,contacts"));
-        request.secure = false;
-        request.setPreferredLang(locale);
-        return request;
-    }
-
-    //Получение контактов из самого Андроида через внутренную БД устройства
-    private Cursor getContacts() {
-        Uri uri = ContactsContract.Contacts.CONTENT_URI;
-        String[] projection = new String[] { ContactsContract.Contacts._ID,
-                ContactsContract.Contacts.DISPLAY_NAME };
-        String selection = ContactsContract.Contacts.IN_VISIBLE_GROUP + " = 1";
-        String[] selectionArgs = null;
-        String sortOrder = ContactsContract.Contacts.DISPLAY_NAME
-                + " COLLATE LOCALIZED ASC";
-
-        return getContentResolver().query(uri, projection, selection, selectionArgs, sortOrder);
-    }
-
-    //Возвращает список имём контактов, имеющихся на устройстве
-    private Queue<String> getPhoneContacts() {
-        Cursor cursor = getContacts();
-
-        Queue<String> contactNames = new LinkedList<String>();
-        while(cursor.moveToNext()) {
-
-            String displayName = cursor.getString(cursor
-                    .getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-            contactNames.add(displayName);
-        }
-        return contactNames;
-    }
-
     //Синхронизация контактов(пока только с сетью ВК)
     private void sync() {
+        ((Button)findViewById(R.id.vk_friends_button)).setEnabled(false);
+        ((Button)findViewById(R.id.fb_friends_button)).setEnabled(false);
+        ((Button)findViewById(R.id.phonebook_button)).setEnabled(false);
+
         this.setTitle("Синхронизация...");
         syncContacts.clear();
 
+        scThread = new SyncContactsThread(vkFriends, fbFriends, syncContacts, phonebook);
 
-        VKRequest request = getFriendsRequest(localeRus); //Получаем запрос для ВК, см. выше функцию getFriendsRequest
-        request.executeWithListener(new VKRequest.VKRequestListener() { //отправляем запрос на сервер ВК
+        new Thread(new Runnable() {
             @Override
-            public void onComplete(VKResponse response) { //При удачном завершении запроса
-                super.onComplete(response);
-
+            public void run() {
                 try {
-                    ArrayList<String> vkFriendsList = makeVkFriendsList(response); //Получить список друзей ВК, т.е. заполнить список vkFriends
-                    Queue<String> phonebookNames = getPhoneContacts(); //Получить список друзей с устройства
+                    scThread.start();
+                    scThread.join();
+                } catch (InterruptedException e) {
 
-                    //Следующий цикл находит схожие контакты в ВК и на устройстве, путём сравнивания имён пользователей
-                    while (!phonebookNames.isEmpty()) {
-                        //Создаём новый SyncContact. SyncContact.java для подробностей
-                        SyncContact item = new SyncContact();
-
-                        //получить текущее имя контакта с телефона
-                        String phonebookName = phonebookNames.remove();
-                        //добавить его в item
-                        item.setPhonebookName(phonebookName);
-
-                        //В цикле пройтись по всем друзьям ВК и выяснить, есть ли контакт с таким же именем(phonebookName)
-                        for (int vkInd = 0; vkInd < vkFriendsList.size(); ++vkInd) {
-                            String[] components = vkFriendsList.get(vkInd).split(" ");
-                            int containsCount = 0;
-                            for (int compInd = 0; compInd < components.length; ++compInd) {
-                                if (phonebookName.contains(components[compInd])) {
-                                    ++containsCount;
-                                }
-                            }
-
-                            //Если схожий контакт найден, то добавить его в item
-                            if (containsCount == components.length) {
-                                item.setVkContact(vkFriends.get(vkInd));
-                                break;
-                            }
-                        }
-
-                        //если схожий контакт не найден, то установить схожий контакт в ВК или FB как null, т.е. не нашли нужного пользователя
-                        if (item.getVkName().length() == 0) {
-                            item.setVkContact(null);
-                        }
-                        if (item.getFbName().length() == 0) {
-                            item.setFbContact(null);
-                        }
-
-                        //добавить item в синхронизированный список контактов
-                        syncContacts.add(item);
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.this.setTitle("Синхронизация успешно завершена!");
+                        ((Button)findViewById(R.id.vk_friends_button)).setEnabled(true);
+                        ((Button)findViewById(R.id.fb_friends_button)).setEnabled(true);
+                        ((Button)MainActivity.this.findViewById(R.id.phonebook_button)).setEnabled(true);
                     }
-                    MainActivity.this.setTitle("Синхронизация успешно завершена!");
-                } catch (JSONException e) {
-
-                }
+                });
             }
-        });
+        }).start();
     }
 
-    //Проверить номер-телефона
-    private boolean correctPhoneNumber(String number) {
-        //убрать все нецифровые символы и символ + из номера телефона
-        String modifiedNumber = number.replaceAll("[^0-9\\+]","");
-
-        //если в результате длина номера оказалась равной 0, то считается, что данный телефонный номер некорректный
-        if( modifiedNumber.length() == 0) {
-            return false;
+    public static ArrayList<String> getContactNames(ArrayList<Contact> friends) {
+        ArrayList<String> friendNames = new ArrayList<String>();
+        for(Contact c: friends) {
+            friendNames.add(c.getName());
         }
-        //если номер телефона содержит какой-либо нецифровой символ, то считается, что данный телефонный номер некорректный
-        for( int i = 0; i < modifiedNumber.length(); ++i ) {
-            if( !Character.isDigit(modifiedNumber.charAt(i)) ) {
-                return false;
-            }
-        }
-
-        //иначе номер телефона корректный
-        return true;
-    }
-
-    //Заполнить/обновить список друзей ВК
-    private ArrayList<String> makeVkFriendsList(VKResponse response) throws JSONException {
-        //Получить результат ответа сервера в виде JSONArray
-        JSONArray res = response.json.getJSONObject("response").getJSONArray("items");
-        ArrayList<String> friendsList = new ArrayList<String>();
-
-        //Для каждого элемента массива res(который по сути представляет собой список друзей, но в неудобном для нас виде)
-        //получить структуру Contact, т.е. контакт ВК
-        for( int i = 0; i < res.length(); ++i ) {
-            //Получить имя и фамилию
-            String fullName = res.getJSONObject(i).getString("first_name") + ' ' +
-                              res.getJSONObject(i).getString("last_name");
-            //добавить в friendsList
-            friendsList.add(fullName);
-
-            String mobilePhone = "Мобильный телефон не указан";
-            //Проверить наличие мобильного телефона
-            //Если он существует, то проверить его корректность
-            if( res.getJSONObject(i).has("mobile_phone") &&
-                res.getJSONObject(i).getString("mobile_phone").length() > 0 &&
-                correctPhoneNumber(res.getJSONObject(i).getString("mobile_phone")) )
-            {
-                mobilePhone = "Мобильный телефон:\n" + res.getJSONObject(i).getString("mobile_phone");
-            }
-
-            //Проверить наличие домашнего телефона
-            //Если он существует, то проверить его корректность
-            String homePhone = "Домашний телефон не указан";
-            if( res.getJSONObject(i).has("home_phone") &&
-                res.getJSONObject(i).getString("home_phone").length() > 0 &&
-                correctPhoneNumber(res.getJSONObject(i).getString("home_phone")) )
-            {
-                homePhone = "Домашний телефон:\n" + res.getJSONObject(i).getString("home_phone");
-            }
-
-            //Получить адрес, если он указан
-            String address = "";
-            if( res.getJSONObject(i).has("country") ) {
-                address += res.getJSONObject(i).getJSONObject("country").getString("title");
-                if( res.getJSONObject(i).has("city") ) {
-                    address += ", " + res.getJSONObject(i).getJSONObject("city").getString("title");
-                }
-            } else {
-                address += "Адрес не указан";
-            }
-
-            //Формируем новый Contact используя fullName, mobilePhone, homePhone и address
-            //Подробно в файле Contact.java
-            Contact contact = new Contact(new String[]{fullName, mobilePhone, homePhone, address});
-            vkFriends.add(contact);
-        }
-        return friendsList;
+        return friendNames;
     }
 
     //Отобразить список друзей ВК
-    private void showFriends(final ArrayList <String> friendsList, final ArrayList<Contact> friends) {
-        this.setTitle("Друзья ВК"); /*TODO: add string with name of social network*/
+    public void showFriends(final ArrayList <String> friendsList, final ArrayList<Contact> friends) {
+        this.setTitle("Друзья"); /*TODO: add string with name of social network*/
         //Список, в котоый будем выводить имена друзей
         ListView lv = ((ListView)findViewById(R.id.lv));
 
@@ -380,91 +244,54 @@ public class MainActivity extends FragmentActivity {
     }
 
     //Сделать запрос на сервер ВК для получения списка друзей и отобразить результаты в ListView
+    //Всё происходит через класс VkRequestTask
     private void performVkRequestAndShowResults() {
-        VKRequest request = getFriendsRequest(localeRus);
+        this.setTitle("Получение списка друзей...");
+        VKRequest request = Requests.vkFriendsRequest(Requests.LOCALE_RUS);
 
-        //Делаем запрос
-        request.executeWithListener(new VKRequest.VKRequestListener() {
+        vkThread = new VkRequestThread(vkFriends, request);
+        new Thread(new Runnable() {
             @Override
-            public void onComplete(VKResponse response) {
-                super.onComplete(response);
-                //В результате запроса получаем из ответа список друзей в удобном виде и выводим имена друзей в ListView
-                try {
-                    ArrayList<String> friendsList = makeVkFriendsList(response);
-                    showFriends(friendsList, vkFriends);
-                } catch (JSONException e) {
-                    ((ListView) findViewById(R.id.lv)).setAdapter(
-                            new ArrayAdapter<String>(MainActivity.this,
-                            R.layout.list_item,
-                            R.id.li,
-                            new String[]{e.toString()}));
+            public void run() {
+                try{
+                    vkThread.start();
+                    vkThread.join();
+                } catch (InterruptedException e) {
+
                 }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showFriends(getContactNames(vkFriends), vkFriends);
+                    }
+                });
             }
-            //Обработка ошибки в случае неудачного результата
-            @Override
-            public void onError(VKError error) {
-                if (error.apiError != null)
-                    ((ListView) findViewById(R.id.lv)).setAdapter(
-                            new ArrayAdapter<String>(MainActivity.this,
-                            R.layout.list_item,
-                            R.id.li,
-                            new String[]{error.errorMessage}));
-                else {
-                    ((ListView) findViewById(R.id.lv)).setAdapter(
-                            new ArrayAdapter<String>(MainActivity.this,
-                            R.layout.list_item,
-                            R.id.li,
-                            new String[]{String.format("Error %d: %s", error.errorCode, error.errorMessage)}));
-                }
-            }
-        });
-    }
-
-    private ArrayList<String> makeFbFriendsList(Response response) {
-        List<GraphUser> friends = response.getGraphObjectAs(GraphMultiResult.class).
-                getData().castToListOf(GraphUser.class);
-
-        ArrayList<String> friendsList = new ArrayList<String>();
-        for (GraphUser gu : friends) {
-            String fullName = gu.getName();
-            friendsList.add(fullName);
-
-            GraphLocation gl = gu.getLocation();
-            String address = "";
-            if (gl != null) {
-                address = gu.getLocation().getProperty("name").toString();
-            }
-            String email = "E-mail не указан";
-            if( gu.getProperty("email") != null ) {
-                email = gu.getProperty("email").toString();
-            }
-
-            Contact contact = new Contact(new String[]{ fullName, address, email });
-            contact.setMobilePhone("Facebook не предоставляет данную информацию");
-            fbFriends.add(contact);
-        }
-        return friendsList;
+        }).start();
     }
 
     //Тоже самое для FB, в разработке
     private void performFbRequestAndShowResults() {
-        Request request = Request.newGraphPathRequest(Session.getActiveSession(), "me/friends", null);
-        Set<String> fields = new HashSet<String>();
-        String[] requiredFields = new String[] { "name, location, email" };
-        fields.addAll(Arrays.asList(requiredFields));
+        this.setTitle("Получение списка друзей...");
+        Request request = Requests.fbFriendsRequest();
+        fbThread = new FbRequestThread(fbFriends, request);
 
-        Bundle parameters = request.getParameters();
-        parameters.putString("fields", TextUtils.join(",", fields));
-        request.setParameters(parameters);
-
-        request.setCallback(new Request.Callback() {
+        new Thread(new Runnable() {
             @Override
-            public void onCompleted(Response response) {
-                ArrayList<String> friendsList = makeFbFriendsList(response);
-                showFriends(friendsList, fbFriends);
+            public void run() {
+                try{
+                    fbThread.start();
+                    fbThread.join();
+                } catch (InterruptedException e) {
+
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showFriends(getContactNames(fbFriends), fbFriends);
+                    }
+                });
             }
-        });
-        request.executeAsync();
+        }).start();
     }
 
     //Отобразить синхронизированный список контактов(пока только с ВК)
@@ -479,7 +306,7 @@ public class MainActivity extends FragmentActivity {
 
             //просто выводим весь список контактов с устройства
             //заполняем синхронизированный список контактов только именами контактов с устройства
-            Queue<String> phoneContacts = getPhoneContacts();
+            Queue<String> phoneContacts = phonebook.getContactNames();
             while( !phoneContacts.isEmpty() ) {
                 String pbName = phoneContacts.remove();
                 SyncContact item = new SyncContact(pbName, null, null);
