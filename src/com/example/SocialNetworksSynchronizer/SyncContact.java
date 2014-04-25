@@ -8,7 +8,10 @@ package com.example.SocialNetworksSynchronizer;
 
 //Имеются методы для получения параметров контакта, таких как имя в устройстве, имя в ВК, ...
 
-public class SyncContact {
+import java.io.Serializable;
+
+public class SyncContact implements Serializable{
+
     private String phonebookName = "";
     private Contact vkContact = null;
     private Contact fbContact = null;

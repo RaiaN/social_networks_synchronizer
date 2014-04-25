@@ -1,13 +1,13 @@
 package com.example.SocialNetworksSynchronizer;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.facebook.*;
@@ -40,8 +40,9 @@ public class MainActivity extends FragmentActivity {
 
     private ArrayList<Contact> vkFriends = new ArrayList<Contact>();
     private ArrayList<Contact> fbFriends = new ArrayList<Contact>();
-
     private ArrayList<SyncContact> syncContacts = new ArrayList<SyncContact>();   //SyncContact.java, синхронизированный список друзей
+
+    private final DatabaseHandler handler = new DatabaseHandler(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,29 @@ public class MainActivity extends FragmentActivity {
 
         //вызываем функцию для авторизации пользователя в ВК и FB
         init();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = handler.getReadableDatabase();
+                handler.onCreate(db);
+                String[] projection = {
+                    DatabaseHandler.ID_COLUMN,
+                    DatabaseHandler.CONTACT
+                };
+
+                try {
+                    Cursor cursor = db.query(DatabaseHandler.TABLE_NAME, projection, null, null, null, null, null);
+                    while( cursor.moveToNext() ) {
+                        byte[] b = cursor.getBlob(cursor.getColumnIndex(DatabaseHandler.CONTACT));
+                        SyncContact contact = (SyncContact)Serializer.deserializeObject(b);
+                        syncContacts.add(contact);
+                    }
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     //Следующие 3 метода нужны для корректной работы с VkSDK и FacebookSDK
@@ -157,13 +181,12 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onAccessDenied(VKError authorizationError) {
-            //((ListView)findViewById(R.id.lv)).(authorizationError.apiError.errorMessage);
+
         }
 
         @Override
         public void onReceiveNewToken(VKAccessToken newToken) {
             accessToken = newToken;
-            //((ListView)findViewById(R.id.lv)).setText("Successful authorization");
         }
 
         @Override
@@ -182,7 +205,6 @@ public class MainActivity extends FragmentActivity {
         syncContacts.clear();
 
         scThread = new SyncContactsThread(vkFriends, fbFriends, syncContacts, phonebook);
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -201,6 +223,23 @@ public class MainActivity extends FragmentActivity {
                         ((Button)MainActivity.this.findViewById(R.id.phonebook_button)).setEnabled(true);
                     }
                 });
+                SQLiteDatabase db = handler.getWritableDatabase();
+                handler.dropTable(db);
+
+                int id = 0;
+                for(SyncContact sc: syncContacts) {
+                    ContentValues values = new ContentValues();
+                    values.put(DatabaseHandler.ID_COLUMN, id);
+                    values.put(DatabaseHandler.CONTACT, Serializer.serializeObject(sc));
+
+                    try {
+                        long resRowInd = db.insert(DatabaseHandler.TABLE_NAME, null, values);
+                        Log.e("INSERT QUERY ID", String.valueOf(resRowInd));
+                        id += 1;
+                    } catch( NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }).start();
     }

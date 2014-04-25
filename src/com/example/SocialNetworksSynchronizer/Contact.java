@@ -4,7 +4,9 @@ package com.example.SocialNetworksSynchronizer;
 //Одно поле для ВК может иметь значение, тогда как для FB нет, как в случае с номером телефона (mobilePhone или homePhone)
 
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
     private String name        = "";
     private String mobilePhone = "";
     private String homePhone   = "";
