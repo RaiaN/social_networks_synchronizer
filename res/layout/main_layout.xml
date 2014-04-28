@@ -3,13 +3,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+              android:layout_height="fill_parent"
+              android:background="@color/vk_grey_color">
+
+        <EditText
+                android:id="@+id/search_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_margin="3dip"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_edittext" android:inputType="text">
+        </EditText>
 
         <ListView
                 android:id="@+id/lv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/search_field"
                 android:layout_above="@+id/buttons_layout"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="6.0sp">

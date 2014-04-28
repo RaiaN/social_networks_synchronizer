@@ -1,6 +1,5 @@
 package com.example.SocialNetworksSynchronizer;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,8 +17,8 @@ import java.util.*;
 
 public class MainActivity extends FragmentActivity {
     private final String vkAppId = "4313814";   //Вконтакте, номер приложения
-    private final String fbAppId = "1416447705289612";
-    private VKAccessToken accessToken = null;
+    //private final String fbAppId = "1416447705289612";
+    //private VKAccessToken accessToken = null;
 
     public final String[] permissions = new String[] { //Разрешения для ВК: друзья и не использовать HTTPS
             VKScope.FRIENDS,
@@ -32,58 +31,61 @@ public class MainActivity extends FragmentActivity {
             "email"
     };
 
-    Phonebook phonebook = new Phonebook(this);
+    private final int SYNC_BTN_IND = 0; //кнопка Sync
+    private final int VK_BTN_IND   = 1; //кнопка VK friends
+    private final int FB_BTN_IND   = 2; //кнопка FB friends
+    private final int PB_BTN_IND   = 3; //кнопка Phonebook
+    private final int[] ACTNS_BTNS = new int[] { SYNC_BTN_IND, VK_BTN_IND, FB_BTN_IND, PB_BTN_IND };
 
-    VkRequestThread vkThread = null;
-    FbRequestThread fbThread = null;
-    SyncContactsThread scThread = null;
+    private Button[] buttons = new Button[4];
+
+    private Phonebook phonebook = new Phonebook(this);
+    private final DatabaseHandler handler = new DatabaseHandler(this);
+
+    private VkRequestThread vkThread = null;
+    private FbRequestThread fbThread = null;
+    private SyncContactsThread scThread = null;
 
     private ArrayList<Contact> vkFriends = new ArrayList<Contact>();
     private ArrayList<Contact> fbFriends = new ArrayList<Contact>();
     private ArrayList<SyncContact> syncContacts = new ArrayList<SyncContact>();   //SyncContact.java, синхронизированный список друзей
-
-    private final DatabaseHandler handler = new DatabaseHandler(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);  //устанавливаем Layout для текущей активити (файл main_layout.xml)
 
+        buttons[SYNC_BTN_IND] = (Button)findViewById(R.id.sync_button);
+        buttons[VK_BTN_IND] = (Button)findViewById(R.id.vk_friends_button);
+        buttons[FB_BTN_IND] = (Button)findViewById(R.id.fb_friends_button);
+        buttons[PB_BTN_IND] = (Button)findViewById(R.id.phonebook_button);
+
         //Задаём обработчики события нажатия на кнопку для каждой кнопки
-        final Button syncButton = (Button)findViewById(R.id.sync_button);
-        syncButton.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.sync_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sync();
             }
         });
-
-        final Button vkButton = (Button)findViewById(R.id.vk_friends_button);
-        vkButton.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.vk_friends_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 performVkRequestAndShowResults();
             }
         });
-
-        final Button fbButton = (Button)findViewById(R.id.fb_friends_button);
-        fbButton.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.fb_friends_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 performFbRequestAndShowResults();
             }
         });
-
-        final Button phonebookButton = (Button)findViewById(R.id.phonebook_button);
-        phonebookButton.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.phonebook_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 makePhonebook();
             }
         });
-
-        final Button logoutButton = (Button)findViewById(R.id.logout);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.logout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 VKSdk.logout();
@@ -93,29 +95,7 @@ public class MainActivity extends FragmentActivity {
 
         //вызываем функцию для авторизации пользователя в ВК и FB
         init();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SQLiteDatabase db = handler.getReadableDatabase();
-                handler.onCreate(db);
-                String[] projection = {
-                    DatabaseHandler.ID_COLUMN,
-                    DatabaseHandler.CONTACT
-                };
-
-                try {
-                    Cursor cursor = db.query(DatabaseHandler.TABLE_NAME, projection, null, null, null, null, null);
-                    while( cursor.moveToNext() ) {
-                        byte[] b = cursor.getBlob(cursor.getColumnIndex(DatabaseHandler.CONTACT));
-                        SyncContact contact = (SyncContact)Serializer.deserializeObject(b);
-                        syncContacts.add(contact);
-                    }
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        readSyncContactsFromDb();
     }
 
     //Следующие 3 метода нужны для корректной работы с VkSDK и FacebookSDK
@@ -138,33 +118,35 @@ public class MainActivity extends FragmentActivity {
         Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
     }
 
-    //Переопределение стандартного метода openActiveSession FacebookSDK. Сделано с целью получения дополнительных разрешений
-    //для данного приложения, чтобы получить дополнительную информацию для пользователя
-    private Session openActiveSession(Activity activity, boolean allowLoginUI, List<String> permissions, Session.StatusCallback callback) {
-        Session.OpenRequest openRequest = new Session.OpenRequest(activity).setPermissions(permissions).setCallback(callback);
-        Session session = new Session.Builder(activity).build();
-        if (SessionState.CREATED_TOKEN_LOADED.equals(session.getState()) || allowLoginUI) {
-            Session.setActiveSession(session);
-            session.openForRead(openRequest);
-            return session;
-        }
-        return null;
-    }
+    private void readSyncContactsFromDb() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                changeButtonsState(ACTNS_BTNS, false);
+                SQLiteDatabase db = handler.getReadableDatabase();
+                handler.onCreate(db);
+                String[] projection = {
+                        DatabaseHandler.ID_COLUMN,
+                        DatabaseHandler.CONTACT
+                };
 
-    private void init() {
-        //Авторизация в Вконтакте
-        VKUIHelper.onCreate(this);
-        VKSdk.initialize(sdkListener, vkAppId);
-        VKSdk.authorize(permissions);
+                try {
+                    Cursor cursor = db.query(DatabaseHandler.TABLE_NAME, projection, null, null, null, null, null);
+                    while( cursor.moveToNext() ) {
+                        byte[] b = cursor.getBlob(cursor.getColumnIndex(DatabaseHandler.CONTACT));
+                        SyncContact contact = (SyncContact)Serializer.deserializeObject(b);
+                        syncContacts.add(contact);
+                    }
+                    cursor.close();
+                    db.close();
 
-        //авторизация в Facebook
-        Session session = openActiveSession(this, true, Arrays.asList("friends_hometown, friends_location"),
-            new Session.StatusCallback() {
-                @Override
-                public void call(Session session, SessionState state, Exception exception) {
-                    if (session.isOpened()) {}
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    return;
                 }
-            });
+                changeButtonsState(ACTNS_BTNS, true);
+            }
+        }).start();
     }
 
     //стандартный Listener(обрабочик событий) для VkSDK
@@ -173,37 +155,81 @@ public class MainActivity extends FragmentActivity {
         public void onCaptchaError(VKError captchaError) {
             new VKCaptchaDialog(captchaError).show();
         }
-
         @Override
         public void onTokenExpired(VKAccessToken expiredToken) {
             VKSdk.authorize(permissions);
         }
-
         @Override
         public void onAccessDenied(VKError authorizationError) {
 
         }
-
         @Override
         public void onReceiveNewToken(VKAccessToken newToken) {
-            accessToken = newToken;
+            //accessToken = newToken;
         }
-
         @Override
         public void onAcceptUserToken(VKAccessToken token) {
 
         }
     };
 
-    //Синхронизация контактов(пока только с сетью ВК)
+    private void vkLogin() {
+        if( (VKSdk.instance() != null) && VKSdk.isLoggedIn() ) {
+            return;
+        }
+
+        //Авторизация в Вконтакте
+        VKUIHelper.onCreate(MainActivity.this);
+        VKSdk.initialize(sdkListener, vkAppId);
+        VKSdk.authorize(permissions);
+    }
+
+    private void fbLogin() {
+        if( (Session.getActiveSession() != null) &&Session.getActiveSession().isOpened() ) {
+            return;
+        }
+
+        //Авторизация в Facebook
+        Session.openActiveSession(this, true,new Session.StatusCallback() {
+            @Override
+            public void call(Session session, SessionState state, Exception exception) {
+                if (session.isOpened()) { }
+            }
+        });
+    }
+
+    private void init() {
+        vkLogin();
+        fbLogin();
+    }
+
+    private void changeButtonsState(final int[] indexes, final boolean enabled) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                for( int ind: indexes ) {
+                    buttons[ind].setEnabled(enabled);
+                }
+            }
+        });
+
+    }
+
+    //Синхронизация контактов c VK и FB
     private void sync() {
-        ((Button)findViewById(R.id.vk_friends_button)).setEnabled(false);
-        ((Button)findViewById(R.id.fb_friends_button)).setEnabled(false);
-        ((Button)findViewById(R.id.phonebook_button)).setEnabled(false);
+        changeButtonsState(ACTNS_BTNS, false);
+
+        vkLogin();
+        fbLogin();
+
+        if( !VKSdk.isLoggedIn() || !Session.getActiveSession().isOpened() ) {
+            changeButtonsState(ACTNS_BTNS, true);
+            return;
+        }
 
         this.setTitle("Синхронизация...");
-        syncContacts.clear();
 
+        syncContacts.clear();
         scThread = new SyncContactsThread(vkFriends, fbFriends, syncContacts, phonebook);
         new Thread(new Runnable() {
             @Override
@@ -212,17 +238,9 @@ public class MainActivity extends FragmentActivity {
                     scThread.start();
                     scThread.join();
                 } catch (InterruptedException e) {
-
+                    e.printStackTrace();
+                    return;
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        MainActivity.this.setTitle("Синхронизация успешно завершена!");
-                        ((Button)findViewById(R.id.vk_friends_button)).setEnabled(true);
-                        ((Button)findViewById(R.id.fb_friends_button)).setEnabled(true);
-                        ((Button)MainActivity.this.findViewById(R.id.phonebook_button)).setEnabled(true);
-                    }
-                });
                 SQLiteDatabase db = handler.getWritableDatabase();
                 handler.dropTable(db);
 
@@ -238,8 +256,18 @@ public class MainActivity extends FragmentActivity {
                         id += 1;
                     } catch( NullPointerException e) {
                         e.printStackTrace();
+                        return;
                     }
                 }
+                db.close();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.this.setTitle("Синхронизация успешно завершена!");
+                        changeButtonsState(ACTNS_BTNS, true);
+                    }
+                });
             }
         }).start();
     }
@@ -252,7 +280,7 @@ public class MainActivity extends FragmentActivity {
         return friendNames;
     }
 
-    //Отобразить список друзей ВК
+    //Отобразить список друзей ВК или FB
     public void showFriends(final ArrayList <String> friendsList, final ArrayList<Contact> friends) {
         this.setTitle("Друзья"); /*TODO: add string with name of social network*/
         //Список, в котоый будем выводить имена друзей
@@ -285,10 +313,19 @@ public class MainActivity extends FragmentActivity {
     //Сделать запрос на сервер ВК для получения списка друзей и отобразить результаты в ListView
     //Всё происходит через класс VkRequestTask
     private void performVkRequestAndShowResults() {
-        this.setTitle("Получение списка друзей...");
-        VKRequest request = Requests.vkFriendsRequest(Requests.LOCALE_RUS);
+        changeButtonsState(new int[]{ VK_BTN_IND }, false);
 
+        vkLogin();
+        if( !VKSdk.isLoggedIn() ) {
+            changeButtonsState(new int[]{ VK_BTN_IND }, true);
+            return;
+        }
+
+        this.setTitle("Получение списка друзей...");
+
+        VKRequest request = Requests.vkFriendsRequest(Requests.LOCALE_RUS);
         vkThread = new VkRequestThread(vkFriends, request);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -296,12 +333,14 @@ public class MainActivity extends FragmentActivity {
                     vkThread.start();
                     vkThread.join();
                 } catch (InterruptedException e) {
-
+                    e.printStackTrace();
+                    return;
                 }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         showFriends(getContactNames(vkFriends), vkFriends);
+                        changeButtonsState(new int[]{ VK_BTN_IND }, true);
                     }
                 });
             }
@@ -310,7 +349,16 @@ public class MainActivity extends FragmentActivity {
 
     //Тоже самое для FB, в разработке
     private void performFbRequestAndShowResults() {
+        changeButtonsState(new int[]{ FB_BTN_IND }, false);
+
+        fbLogin();
+        if( !Session.getActiveSession().isOpened() ) {
+            changeButtonsState(new int[]{ FB_BTN_IND }, true);
+            return;
+        }
+
         this.setTitle("Получение списка друзей...");
+
         Request request = Requests.fbFriendsRequest();
         fbThread = new FbRequestThread(fbFriends, request);
 
@@ -321,12 +369,14 @@ public class MainActivity extends FragmentActivity {
                     fbThread.start();
                     fbThread.join();
                 } catch (InterruptedException e) {
-
+                    e.printStackTrace();
+                    return;
                 }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         showFriends(getContactNames(fbFriends), fbFriends);
+                        changeButtonsState(new int[]{ FB_BTN_IND }, true);
                     }
                 });
             }
