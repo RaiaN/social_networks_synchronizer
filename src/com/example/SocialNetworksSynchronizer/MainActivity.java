@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -35,9 +36,10 @@ public class MainActivity extends FragmentActivity {
     private final int VK_BTN_IND   = 1; //кнопка VK friends
     private final int FB_BTN_IND   = 2; //кнопка FB friends
     private final int PB_BTN_IND   = 3; //кнопка Phonebook
-    private final int[] ACTNS_BTNS = new int[] { SYNC_BTN_IND, VK_BTN_IND, FB_BTN_IND, PB_BTN_IND };
+    private final int ST_BTN_IND   = 4; //кнопка Settings
+    private final int[] ACTNS_BTNS = new int[] { SYNC_BTN_IND, VK_BTN_IND, FB_BTN_IND, ST_BTN_IND };
 
-    private Button[] buttons = new Button[4];
+    private Button[] buttons = new Button[ST_BTN_IND+1];
 
     private Phonebook phonebook = new Phonebook(this);
     private final DatabaseHandler handler = new DatabaseHandler(this);
@@ -59,6 +61,7 @@ public class MainActivity extends FragmentActivity {
         buttons[VK_BTN_IND] = (Button)findViewById(R.id.vk_friends_button);
         buttons[FB_BTN_IND] = (Button)findViewById(R.id.fb_friends_button);
         buttons[PB_BTN_IND] = (Button)findViewById(R.id.phonebook_button);
+        buttons[ST_BTN_IND] = (Button)findViewById(R.id.settings_button);
 
         //Задаём обработчики события нажатия на кнопку для каждой кнопки
         ((Button)findViewById(R.id.sync_button)).setOnClickListener(new View.OnClickListener() {
@@ -85,7 +88,13 @@ public class MainActivity extends FragmentActivity {
                 makePhonebook();
             }
         });
-        ((Button)findViewById(R.id.logout)).setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.settings_button)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSettings();
+            }
+        });
+        ((Button)findViewById(R.id.logout_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 VKSdk.logout();
@@ -281,14 +290,14 @@ public class MainActivity extends FragmentActivity {
     }
 
     //Отобразить список друзей ВК или FB
-    public void showFriends(final ArrayList <String> friendsList, final ArrayList<Contact> friends) {
+    public void showFriends(final ArrayList<Contact> friends) {
         this.setTitle("Друзья"); /*TODO: add string with name of social network*/
         //Список, в котоый будем выводить имена друзей
         ListView lv = ((ListView)findViewById(R.id.lv));
 
         //задаём данные для данного списка, т.е. чем список будет заполняться
-        ArrayAdapter<String> friendsAdapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.li, friendsList);
-        lv.setAdapter(friendsAdapter);
+        ListItemArrayAdapter adapter = new ListItemArrayAdapter(this, friends);
+        lv.setAdapter(adapter);
 
         //если пользователь кликает на какой-либо элемент списка, то предоставить подробную информацию о данном пользователе
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -302,7 +311,6 @@ public class MainActivity extends FragmentActivity {
                 intent.putExtra(extras[0], selectedContact.getName());
                 intent.putExtra(extras[1], selectedContact.getMobilePhone() + '\n' + selectedContact.getHomePhone());
                 intent.putExtra(extras[2], selectedContact.getAddress());
-                intent.putExtra(extras[3], selectedContact.getEmail());
 
                 //открыть ещё одну Activity, FriendInfoActivity
                 startActivity(intent);
@@ -321,7 +329,7 @@ public class MainActivity extends FragmentActivity {
             return;
         }
 
-        this.setTitle("Получение списка друзей...");
+        this.setTitle("Получение списка друзей ВК...");
 
         VKRequest request = Requests.vkFriendsRequest(Requests.LOCALE_RUS);
         vkThread = new VkRequestThread(vkFriends, request);
@@ -339,7 +347,7 @@ public class MainActivity extends FragmentActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showFriends(getContactNames(vkFriends), vkFriends);
+                        showFriends(vkFriends);
                         changeButtonsState(new int[]{ VK_BTN_IND }, true);
                     }
                 });
@@ -357,7 +365,7 @@ public class MainActivity extends FragmentActivity {
             return;
         }
 
-        this.setTitle("Получение списка друзей...");
+        this.setTitle("Получение списка друзей FB...");
 
         Request request = Requests.fbFriendsRequest();
         fbThread = new FbRequestThread(fbFriends, request);
@@ -375,7 +383,7 @@ public class MainActivity extends FragmentActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showFriends(getContactNames(fbFriends), fbFriends);
+                        showFriends(fbFriends);
                         changeButtonsState(new int[]{ FB_BTN_IND }, true);
                     }
                 });
@@ -406,5 +414,9 @@ public class MainActivity extends FragmentActivity {
         ContactArrayAdapter adapter = new ContactArrayAdapter(this, syncContacts);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(null);
+    }
+
+    private void showSettings() {
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 }

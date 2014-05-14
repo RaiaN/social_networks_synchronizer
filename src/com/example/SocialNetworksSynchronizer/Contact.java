@@ -5,30 +5,40 @@ package com.example.SocialNetworksSynchronizer;
 
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Contact implements Serializable {
     private String name        = "";
+    private String birthday    = "";
     private String mobilePhone = "";
     private String homePhone   = "";
     private String address     = "";
-    private String email       = "";
+    private String skype       = "";
+    private String twitter     = "";
+    private String instagram   = "";
+    private String photoUrl    = "";
+    private String university  = "";
+    private String faculty     = "";
 
-    public Contact(String[] contactInfo) {
-        if( contactInfo.length == 4 ) {
-            name        = contactInfo[0];
-            mobilePhone = contactInfo[1];
-            homePhone   = contactInfo[2];
-            address     = contactInfo[3];
-        } else if( contactInfo.length == 3 ) {
-            name = contactInfo[0];
-            address = contactInfo[1];
-            email = contactInfo[2];
-        }
+
+    public Contact(HashMap<String, String> contactInfo) {
+        name        = contactInfo.get("name");
+        mobilePhone = contactInfo.get("mobilePhone");
+        homePhone   = contactInfo.get("homePhone");
+        address     = contactInfo.get("address");
+        birthday    = contactInfo.get("birthday");
+        skype       = contactInfo.get("skype");
+        twitter     = contactInfo.get("twitter");
+        instagram   = contactInfo.get("instagram");
+        photoUrl    = contactInfo.get("photoUrl");
+        university  = contactInfo.get("university");
+        faculty     = contactInfo.get("faculty");
     }
 
     public void setName(String name) {
         this.name = name;
     }
+    public void setBirthday(String birthday) { this.birthday = birthday; }
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
@@ -38,9 +48,14 @@ public class Contact implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    public void setEmail(String address) {
-        this.email = email;
+    public void setSkype(String skype) { this.skype = skype; }
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
     }
+    public void setInstagram(String instagram) { this.instagram = instagram; }
+    public void setPhotoUrl(String photoUrl) { this.photoUrl = photoUrl; }
+    public void setUniversity(String university) { this.university = university; }
+    public void setFaculty(String faculty) { this.faculty = faculty; }
 
     public String getName() {
         return name;
@@ -54,5 +69,15 @@ public class Contact implements Serializable {
     public String getAddress() {
         return address;
     }
-    public String getEmail() { return email; }
+    public String getSkype() { return skype; }
+    public String getBirthday() { return birthday; }
+    public String getTwitter() { return twitter; }
+    public String getInstagram() { return instagram; }
+    public String getPhotoUrl() { return photoUrl; }
+    public String getUniversity() {
+        return university;
+    }
+    public String getFaculty() {
+        return faculty;
+    }
 }

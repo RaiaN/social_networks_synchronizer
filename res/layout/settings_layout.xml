@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+        <LinearLayout
+                android:id="@+id/settings_left_layout"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vk_sync_params"
+                    android:layout_marginBottom="4dp"/>
+
+            <Switch
+                    android:id="@+id/birthday_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birthday"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+            <Switch
+                    android:id="@+id/address_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+            <Switch
+                    android:id="@+id/phone_numbers_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_numbers"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+            <Switch
+                    android:id="@+id/services_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/services"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+            <Switch
+                    android:id="@+id/education_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/education"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/settings_right_layout"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fb_sync_params"
+                    android:layout_marginBottom="4dp"/>
+
+            <Switch
+                    android:id="@+id/birthday_switch_fb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birthday"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+            <Switch
+                    android:id="@+id/address_switch_fb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+            <Switch
+                    android:id="@+id/education_switch_fb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/education"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+            <Switch
+                    android:id="@+id/work_switch_fb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/work"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="12sp" android:checked="false"/>
+
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/apply_settings_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:text="@string/apply"/>
+
+</LinearLayout>

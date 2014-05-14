@@ -5,8 +5,12 @@ import com.facebook.Response;
 import com.facebook.model.GraphLocation;
 import com.facebook.model.GraphMultiResult;
 import com.facebook.model.GraphUser;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FbRequestThread extends Thread {
@@ -26,18 +30,37 @@ public class FbRequestThread extends Thread {
         for (GraphUser gu : friends) {
             String fullName = gu.getName();
 
+            String birthday = gu.getBirthday();
+            if( birthday == null ) {
+                birthday = "";
+            }
+
             GraphLocation gl = gu.getLocation();
             String address = "";
             if (gl != null) {
                 address = gu.getLocation().getProperty("name").toString();
             }
-            String email = "E-mail не указан";
-            if( gu.getProperty("email") != null ) {
-                email = gu.getProperty("email").toString();
+            String url = "";
+            try {
+                url = gu.getInnerJSONObject().getJSONObject("picture").getJSONObject("data").getString("url");
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            Contact contact = new Contact(new String[]{ fullName, address, email });
-            contact.setMobilePhone("Facebook не предоставляет данную информацию");
+            HashMap<String,String> contactInfo = new HashMap<String, String>();
+            contactInfo.put("photoUrl", url);
+            contactInfo.put("name", fullName);
+            contactInfo.put("birthday", birthday);
+            contactInfo.put("mobilePhone", "");
+            contactInfo.put("homePhone", "");
+            contactInfo.put("address", address);
+            contactInfo.put("skype", "");
+            contactInfo.put("twitter", "");
+            contactInfo.put("instagram", "");
+            contactInfo.put("university", "");
+            contactInfo.put("faculty", "");
+
+            Contact contact = new Contact(contactInfo);
             fbFriends.add(contact);
         }
     }
