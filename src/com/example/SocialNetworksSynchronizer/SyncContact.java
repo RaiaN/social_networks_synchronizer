@@ -13,7 +13,6 @@ import java.io.Serializable;
 public class SyncContact implements Serializable{
 
     private String phonebookName = "";
-    private String phonebookAva =  "";
     private Contact vkContact = null;
     private Contact fbContact = null;
 

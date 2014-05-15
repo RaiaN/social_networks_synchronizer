@@ -1,28 +1,23 @@
 package com.example.SocialNetworksSynchronizer;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import com.facebook.Request;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class VkRequestThread extends Thread {
     private ArrayList<Contact> vkFriends = null;
     private VKRequest request = null;
-    private boolean finished = false;
+    public boolean finished = false;
 
     VkRequestThread(ArrayList<Contact> vkFriends, VKRequest request) {
         this.vkFriends = vkFriends;
@@ -62,7 +57,7 @@ public class VkRequestThread extends Thread {
         String birthday = "";
         if( res.getJSONObject(i).has(Requests.VK_BIRTHDATE) &&
             res.getJSONObject(i).getString(Requests.VK_BIRTHDATE).length() > 0 ) {
-            birthday = "День рождения: \n" + res.getJSONObject(i).getString(Requests.VK_BIRTHDATE);
+            birthday = res.getJSONObject(i).getString(Requests.VK_BIRTHDATE);
         }
 
         String mobilePhone = "";
@@ -72,7 +67,7 @@ public class VkRequestThread extends Thread {
                 res.getJSONObject(i).getString(Requests.VK_MOBILE_PHONE).length() > 0 &&
                 correctPhoneNumber(res.getJSONObject(i).getString(Requests.VK_MOBILE_PHONE)) )
         {
-            mobilePhone = "Мобильный телефон:\n" + res.getJSONObject(i).getString(Requests.VK_MOBILE_PHONE);
+            mobilePhone = res.getJSONObject(i).getString(Requests.VK_MOBILE_PHONE);
         }
 
         //Проверить наличие домашнего телефона
@@ -82,24 +77,30 @@ public class VkRequestThread extends Thread {
                 res.getJSONObject(i).getString(Requests.VK_HOME_PHONE).length() > 0 &&
                 correctPhoneNumber(res.getJSONObject(i).getString(Requests.VK_HOME_PHONE)) )
         {
-            homePhone = "Домашний телефон:\n" + res.getJSONObject(i).getString(Requests.VK_HOME_PHONE);
+            homePhone = res.getJSONObject(i).getString(Requests.VK_HOME_PHONE);
         }
 
         //Получить адрес, если он указан
         String address = "";
         if( res.getJSONObject(i).has(Requests.VK_COUNTRY) ) {
-            address += res.getJSONObject(i).getJSONObject(Requests.VK_COUNTRY).getString(Requests.VK_TITLE);
-            if( res.getJSONObject(i).has(Requests.VK_CITY) ) {
-                address += ", " + res.getJSONObject(i).getJSONObject(Requests.VK_CITY).getString(Requests.VK_TITLE);
+            String country = res.getJSONObject(i).getJSONObject(Requests.VK_COUNTRY).getString(Requests.VK_TITLE);
+            String temp = country;
+            if( temp.replaceAll(" ", "").length() > 0 ) {
+                address = country;
+                if( res.getJSONObject(i).has(Requests.VK_CITY) ) {
+                    String city = res.getJSONObject(i).getJSONObject(Requests.VK_CITY).getString(Requests.VK_TITLE);
+                    temp = city;
+                    if( temp.replaceAll(" ", "").length() > 0 ) {
+                        address += ", " + city;
+                    }
+                }
             }
-        } else {
-            address += "Адрес не указан";
         }
 
         String skype = "";
         if( res.getJSONObject(i).has(Requests.VK_SKYPE) &&
                 res.getJSONObject(i).getString(Requests.VK_SKYPE).length() > 0 ) {
-            skype = res.getJSONObject(i).getString(Requests.VK_SKYPE);
+            skype += res.getJSONObject(i).getString(Requests.VK_SKYPE);
         }
         String twitter = "";
         if( res.getJSONObject(i).has(Requests.VK_TWITTER) &&
@@ -112,34 +113,47 @@ public class VkRequestThread extends Thread {
             instagram = res.getJSONObject(i).getString(Requests.VK_INSTAGRAM);
         }
 
-        String university = "";
+        String education = "";
         if( res.getJSONObject(i).has(Requests.VK_UNIVERISTY) &&
                 res.getJSONObject(i).getString(Requests.VK_UNIVERISTY).length() > 0 ) {
-            university = res.getJSONObject(i).getString(Requests.VK_UNIVERISTY);
-        }
-        String faculty = "";
-        if( res.getJSONObject(i).has(Requests.VK_FACULTY) &&
-                res.getJSONObject(i).getString(Requests.VK_FACULTY).length() > 0 ) {
-            faculty = res.getJSONObject(i).getString(Requests.VK_FACULTY);
+            education = res.getJSONObject(i).getString(Requests.VK_UNIVERISTY);
+            if( res.getJSONObject(i).has(Requests.VK_FACULTY) &&
+                    res.getJSONObject(i).getString(Requests.VK_FACULTY).length() > 0 ) {
+                education += ", " + res.getJSONObject(i).getString(Requests.VK_FACULTY);
+            }
         }
 
         HashMap <String,String> contactInfo = new HashMap<String, String>();
-        contactInfo.put("photoUrl", photoUrl);
-        contactInfo.put("name", fullName);
-        contactInfo.put("birthday", birthday);
-        contactInfo.put("mobilePhone", mobilePhone);
-        contactInfo.put("homePhone", homePhone);
-        contactInfo.put("address", address);
-        contactInfo.put("skype", skype);
-        contactInfo.put("twitter", twitter);
-        contactInfo.put("instagram", instagram);
-        contactInfo.put("university", university);
-        contactInfo.put("faculty", faculty);
+        contactInfo.put(Contact.PHOTO_URL, photoUrl);
+        contactInfo.put(Contact.NAME, fullName);
+        contactInfo.put(Contact.BIRTHDAY, birthday);
+        contactInfo.put(Contact.MOBILE_PHONE, mobilePhone);
+        contactInfo.put(Contact.HOME_PHONE, homePhone);
+        contactInfo.put(Contact.ADDRESS, address);
+        contactInfo.put(Contact.SKYPE, skype);
+        contactInfo.put(Contact.TWITTER, twitter);
+        contactInfo.put(Contact.INSTAGRAM, instagram);
+        contactInfo.put(Contact.EDUCATION, education);
 
         Contact contact = new Contact(contactInfo);
-        contact.setBirthday(birthday);
 
         return contact;
+    }
+
+    private void loadImages() {
+        List <String> urls = new ArrayList<String>();
+        for(Contact contact: vkFriends) {
+            urls.add(contact.getPhotoUrl());
+        }
+
+        List <byte[]> avatars = new ArrayList<byte[]>();
+        AsyncTask at = new DownloadImageTask(avatars).execute(TextUtils.join(",", urls));
+        while( !((DownloadImageTask)at).finished ) {}
+
+        for( int i = 0; i < avatars.size(); ++i ) {
+            byte []bytesImage = avatars.get(i);
+            vkFriends.get(i).setImage(bytesImage);
+        }
     }
 
     //Заполнить/обновить список друзей ВК
@@ -157,14 +171,7 @@ public class VkRequestThread extends Thread {
             vkFriends.add(contact);
         }
 
-        List <String> urls = new ArrayList<String>();
-        for(Contact contact: vkFriends) {
-            urls.add(contact.getPhotoUrl());
-        }
-
-        List<byte[]> avatars = new ArrayList<byte[]>();
-        AsyncTask at = new DownloadImageTask(avatars).execute(TextUtils.join(",", urls));
-        while( at.getStatus() != AsyncTask.Status.FINISHED ) {}
+        //loadImages();
     }
 
     @Override
@@ -178,10 +185,9 @@ public class VkRequestThread extends Thread {
                     makeVkFriendsList(response);
                     finished = true;
                 } catch (JSONException e ) {
-
+                    e.printStackTrace();
                 }
             }
         });
-        while( !finished ) {}
     }
 }

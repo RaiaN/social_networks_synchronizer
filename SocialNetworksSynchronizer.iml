@@ -18,6 +18,17 @@
     <orderEntry type="module" module-name="vksdk" />
     <orderEntry type="module" module-name="facebook_sdk" />
     <orderEntry type="library" name="android-support-v4" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/universal-image-loader-1.9.1-with-sources.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/libs/universal-image-loader-1.9.1-with-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
 

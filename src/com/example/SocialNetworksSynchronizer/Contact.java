@@ -5,34 +5,48 @@ package com.example.SocialNetworksSynchronizer;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Contact implements Serializable {
-    private String name        = "";
-    private String birthday    = "";
-    private String mobilePhone = "";
-    private String homePhone   = "";
-    private String address     = "";
-    private String skype       = "";
-    private String twitter     = "";
-    private String instagram   = "";
-    private String photoUrl    = "";
-    private String university  = "";
-    private String faculty     = "";
+    public static String NAME         = "name";
+    public static String BIRTHDAY     = "birthday";
+    public static String MOBILE_PHONE = "mobilePhone";
+    public static String HOME_PHONE   = "homePhone";
+    public static String ADDRESS      = "address";
+    public static String SKYPE        = "skype";
+    public static String TWITTER      = "twitter";
+    public static String INSTAGRAM    = "instagram";
+    public static String PHOTO_URL    = "photoUrl";
+    public static String EDUCATION    = "education";
 
+    public static String []FIELDS     = new String[]{ NAME, BIRTHDAY, MOBILE_PHONE, HOME_PHONE, ADDRESS,
+                                                      SKYPE, TWITTER, INSTAGRAM, EDUCATION };
+
+    private String name           = "";
+    private String birthday       = "";
+    private String mobilePhone    = "";
+    private String homePhone      = "";
+    private String address        = "";
+    private String skype          = "";
+    private String twitter        = "";
+    private String instagram      = "";
+    private String photoUrl       = "";
+    private String education      = "";
+    private byte[] bytesImage     = null;
 
     public Contact(HashMap<String, String> contactInfo) {
-        name        = contactInfo.get("name");
-        mobilePhone = contactInfo.get("mobilePhone");
-        homePhone   = contactInfo.get("homePhone");
-        address     = contactInfo.get("address");
-        birthday    = contactInfo.get("birthday");
-        skype       = contactInfo.get("skype");
-        twitter     = contactInfo.get("twitter");
-        instagram   = contactInfo.get("instagram");
-        photoUrl    = contactInfo.get("photoUrl");
-        university  = contactInfo.get("university");
-        faculty     = contactInfo.get("faculty");
+        name        = contactInfo.get(NAME);
+        mobilePhone = contactInfo.get(MOBILE_PHONE);
+        homePhone   = contactInfo.get(HOME_PHONE);
+        address     = contactInfo.get(ADDRESS);
+        birthday    = contactInfo.get(BIRTHDAY);
+        skype       = contactInfo.get(SKYPE);
+        twitter     = contactInfo.get(TWITTER);
+        instagram   = contactInfo.get(INSTAGRAM);
+        photoUrl    = contactInfo.get(PHOTO_URL);
+        education   = contactInfo.get(EDUCATION);
     }
 
     public void setName(String name) {
@@ -54,12 +68,13 @@ public class Contact implements Serializable {
     }
     public void setInstagram(String instagram) { this.instagram = instagram; }
     public void setPhotoUrl(String photoUrl) { this.photoUrl = photoUrl; }
-    public void setUniversity(String university) { this.university = university; }
-    public void setFaculty(String faculty) { this.faculty = faculty; }
+    public void setEducation(String education) { this.education = education; }
+    public void setImage(byte[] bytesImage) { this.bytesImage = bytesImage; }
 
     public String getName() {
         return name;
     }
+    public String getBirthday() { return birthday; }
     public String getMobilePhone() {
         return mobilePhone;
     }
@@ -70,14 +85,25 @@ public class Contact implements Serializable {
         return address;
     }
     public String getSkype() { return skype; }
-    public String getBirthday() { return birthday; }
     public String getTwitter() { return twitter; }
     public String getInstagram() { return instagram; }
     public String getPhotoUrl() { return photoUrl; }
-    public String getUniversity() {
-        return university;
+    public String getEducation() {
+        return education;
     }
-    public String getFaculty() {
-        return faculty;
+    public List<String> getAllInfo() {
+        List<String> info = new ArrayList<String>();
+        info.add(getName());
+        info.add(getBirthday());
+        info.add(getMobilePhone());
+        info.add(getHomePhone());
+        info.add(getAddress());
+        info.add(getSkype());
+        info.add(getTwitter());
+        info.add(getInstagram());
+        info.add(getEducation());
+        return info;
     }
+
+    public byte[] getImage() { return bytesImage; }
 }

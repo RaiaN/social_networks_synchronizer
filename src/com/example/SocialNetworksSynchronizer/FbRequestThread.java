@@ -1,13 +1,13 @@
 package com.example.SocialNetworksSynchronizer;
 
+import android.os.AsyncTask;
+import android.text.TextUtils;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.model.GraphLocation;
 import com.facebook.model.GraphMultiResult;
 import com.facebook.model.GraphUser;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,20 +48,35 @@ public class FbRequestThread extends Thread {
             }
 
             HashMap<String,String> contactInfo = new HashMap<String, String>();
-            contactInfo.put("photoUrl", url);
-            contactInfo.put("name", fullName);
-            contactInfo.put("birthday", birthday);
-            contactInfo.put("mobilePhone", "");
-            contactInfo.put("homePhone", "");
-            contactInfo.put("address", address);
-            contactInfo.put("skype", "");
-            contactInfo.put("twitter", "");
-            contactInfo.put("instagram", "");
-            contactInfo.put("university", "");
-            contactInfo.put("faculty", "");
+            contactInfo.put(Contact.PHOTO_URL, url);
+            contactInfo.put(Contact.NAME, fullName);
+            contactInfo.put(Contact.BIRTHDAY, birthday);
+            contactInfo.put(Contact.MOBILE_PHONE, "");
+            contactInfo.put(Contact.HOME_PHONE, "");
+            contactInfo.put(Contact.ADDRESS, address);
+            contactInfo.put(Contact.SKYPE, "");
+            contactInfo.put(Contact.TWITTER, "");
+            contactInfo.put(Contact.INSTAGRAM, "");
+            contactInfo.put(Contact.EDUCATION, "");
 
             Contact contact = new Contact(contactInfo);
             fbFriends.add(contact);
+        }
+    }
+
+    private void loadImages() {
+        List <String> urls = new ArrayList<String>();
+        for(Contact contact: fbFriends) {
+            urls.add(contact.getPhotoUrl());
+        }
+
+        List <byte[]> avatars = new ArrayList<byte[]>();
+        AsyncTask at = new DownloadImageTask(avatars).execute(TextUtils.join(",", urls));
+        while( !((DownloadImageTask)at).finished ) {}
+
+        for( int i = 0; i < avatars.size(); ++i ) {
+            byte []bytesImage = avatars.get(i);
+            fbFriends.get(i).setImage(bytesImage);
         }
     }
 
@@ -70,5 +85,7 @@ public class FbRequestThread extends Thread {
         super.start();
         Response response = request.executeAndWait();
         makeFbFriendsList(response);
+
+        loadImages();
     }
 }

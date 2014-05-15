@@ -1,16 +1,23 @@
 package com.example.SocialNetworksSynchronizer;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.AttributeSet;
+import android.text.Html;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.View;
 import android.widget.*;
 import com.facebook.*;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.vk.sdk.*;
 import com.vk.sdk.api.*;
 
@@ -21,15 +28,12 @@ public class MainActivity extends FragmentActivity {
     //private final String fbAppId = "1416447705289612";
     //private VKAccessToken accessToken = null;
 
+    private ImageLoader loader = null;
+    private LruCache<String,Bitmap> bitmapCache = null;
+
     public final String[] permissions = new String[] { //Разрешения для ВК: друзья и не использовать HTTPS
             VKScope.FRIENDS,
             VKScope.NOHTTPS
-    };
-    public static final String[] extras = new String[] { //названия параметров контакта пользователя для передачи в другую Activity
-            "full_name",
-            "phones",
-            "address",
-            "email"
     };
 
     private final int SYNC_BTN_IND = 0; //кнопка Sync
@@ -103,8 +107,11 @@ public class MainActivity extends FragmentActivity {
         });
 
         //вызываем функцию для авторизации пользователя в ВК и FB
+
         init();
         readSyncContactsFromDb();
+        prepareImageLoader();
+        prepareCache();
     }
 
     //Следующие 3 метода нужны для корректной работы с VkSDK и FacebookSDK
@@ -125,6 +132,33 @@ public class MainActivity extends FragmentActivity {
         super.onActivityResult(requestCode, resultCode, data);
         VKUIHelper.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+    }
+
+    private void prepareImageLoader() {
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                                      .cacheInMemory(true)
+                                      .cacheOnDisc(true).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).imageDownloader(new CacheImageDownloader())
+                                          .defaultDisplayImageOptions(options).build();
+        ImageLoader.getInstance().init(config);
+        loader = ImageLoader.getInstance();
+    }
+
+    private void prepareCache() {
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+
+        // Use 1/8th of the available memory for this memory cache.
+        final int cacheSize = maxMemory / 8;
+
+        bitmapCache = new LruCache<String, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(String key, Bitmap bitmap) {
+                // The cache size will be measured in kilobytes rather than
+                // number of items.
+                return bitmap.getByteCount() / 1024;
+            }
+        };
+
     }
 
     private void readSyncContactsFromDb() {
@@ -295,8 +329,8 @@ public class MainActivity extends FragmentActivity {
         //Список, в котоый будем выводить имена друзей
         ListView lv = ((ListView)findViewById(R.id.lv));
 
-        //задаём данные для данного списка, т.е. чем список будет заполняться
-        ListItemArrayAdapter adapter = new ListItemArrayAdapter(this, friends);
+        //задаём данные для списка, т.е. чем список будет заполняться
+        ListItemArrayAdapter adapter = new ListItemArrayAdapter(this, friends, bitmapCache, loader);
         lv.setAdapter(adapter);
 
         //если пользователь кликает на какой-либо элемент списка, то предоставить подробную информацию о данном пользователе
@@ -308,10 +342,11 @@ public class MainActivity extends FragmentActivity {
 
                 //Формируем параметры для другой Activity(для отображения подробной информации о пользователе ВК
                 Intent intent = new Intent(MainActivity.this, FriendInfoActivity.class);
-                intent.putExtra(extras[0], selectedContact.getName());
-                intent.putExtra(extras[1], selectedContact.getMobilePhone() + '\n' + selectedContact.getHomePhone());
-                intent.putExtra(extras[2], selectedContact.getAddress());
 
+                List <String> info = selectedContact.getAllInfo();
+                for( int fieldInd = 0; fieldInd < info.size(); ++fieldInd ) {
+                    intent.putExtra(Contact.FIELDS[fieldInd], info.get(fieldInd));
+                }
                 //открыть ещё одну Activity, FriendInfoActivity
                 startActivity(intent);
             }
@@ -411,7 +446,7 @@ public class MainActivity extends FragmentActivity {
             }
         }
         //Создаём адаптер для отображения данных в ListView
-        ContactArrayAdapter adapter = new ContactArrayAdapter(this, syncContacts);
+        ContactArrayAdapter adapter = new ContactArrayAdapter(this, syncContacts, bitmapCache, loader);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(null);
     }

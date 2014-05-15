@@ -10,8 +10,9 @@
             android:id="@+id/contact_name"
             android:background="@color/white"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:padding="1dp"
+            android:layout_margin="2dp"
             android:layout_width="fill_parent"
             android:layout_height="25dp"
             android:layout_alignParentLeft="true"
@@ -23,6 +24,7 @@
             android:id="@+id/ava"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:layout_margin="2dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/vke_icon"/>
 

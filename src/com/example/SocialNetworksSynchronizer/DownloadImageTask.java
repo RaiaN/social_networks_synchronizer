@@ -4,18 +4,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
+import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
+import java.net.URLConnection;
 import java.util.List;
 
 public class DownloadImageTask extends AsyncTask<String, Void, Void> {
-    private boolean finished = false;
-    private List<byte[]> avatars = new ArrayList<byte[]>();
+    public List <byte[]> avatars = null;
+    public boolean finished = false;
 
-    DownloadImageTask(List<byte[]> avatars) {
+    DownloadImageTask(List <byte[]> avatars) {
         this.avatars = avatars;
     }
 
@@ -23,18 +21,23 @@ public class DownloadImageTask extends AsyncTask<String, Void, Void> {
         try {
             for(String src: urls.split(",")) {
                 URL url = new URL(src);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                avatars.add(Serializer.serializeObject(myBitmap));
+                URLConnection urlConnection = url.openConnection();
+                urlConnection.setConnectTimeout(1000);
+                urlConnection.setDoInput(true);
+                urlConnection.setReadTimeout(1000);
+                Bitmap bm = BitmapFactory.decodeStream(urlConnection.getInputStream());
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.PNG, 90, stream);
+                byte[] byteArray = stream.toByteArray();
+
+                avatars.add(byteArray);
             }
-            finished = true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            avatars.add(new byte[]{});
+            avatars.add(null);
         }
+        finished = true;
         return null;
     }
 
