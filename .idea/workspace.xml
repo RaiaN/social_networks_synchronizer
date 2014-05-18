@@ -17,16 +17,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="815071f9-a89d-44f7-b22c-ba0c12e39eec" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/AsyncTaskListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ParseFbResponseTask.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ParseVkResponseTask.java" />
-      <change type="DELETED" beforePath="C:\IdeaProjects\SocialNetworksSynchronizer\src\com\example\SocialNetworksSynchronizer\DownloadImageTask.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\IdeaProjects\SocialNetworksSynchronizer\src\com\example\SocialNetworksSynchronizer\FbRequestThread.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\IdeaProjects\SocialNetworksSynchronizer\src\com\example\SocialNetworksSynchronizer\SyncContactsThread.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\IdeaProjects\SocialNetworksSynchronizer\src\com\example\SocialNetworksSynchronizer\VkRequestThread.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ListItemArrayAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ListItemArrayAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main_layout.xml" afterPath="$PROJECT_DIR$/res/layout/main_layout.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ParseResponseTask.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContactsTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialNetworksSynchronizer.iws" />
@@ -92,15 +84,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="287" column="36" selection-start="10355" selection-end="10362" vertical-scroll-proportion="0.24593967" vertical-offset="3838" max-vertical-offset="6613">
+            <state line="302" column="40" selection-start="10855" selection-end="10855" vertical-scroll-proportion="0.0" vertical-offset="3838" max-vertical-offset="6613">
               <folding>
                 <element signature="e#7094#8221#0" expanded="true" />
                 <element signature="e#8210#8211#0" expanded="true" />
                 <element signature="e#10682#10690#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SyncContactsTask.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContactsTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="77" column="0" selection-start="2686" selection-end="2686" vertical-scroll-proportion="0.41827768" vertical-offset="697" max-vertical-offset="2516">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -562,7 +563,11 @@
       <created>1400405738370</created>
       <updated>1400405738370</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="1) Замена Thread на AsyncTask&#10;2) Синхронизация с ВК и FB работает&#10;3) Синхронизация выборочных полей работает корректно">
+      <created>1400405762316</created>
+      <updated>1400405762316</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -598,12 +603,12 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.086419754" sideWeight="0.61786234" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29475307" sideWeight="0.15373352" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.08179013" sideWeight="0.15373352" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29475307" sideWeight="0.84626645" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.08179013" sideWeight="0.84626645" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -729,11 +734,6 @@
         <state line="10" column="39" selection-start="355" selection-end="355" vertical-scroll-proportion="-4.76" vertical-offset="51" max-vertical-offset="612">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/CacheImageDownloader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/friend_info_layout.xml">
@@ -976,13 +976,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContactsTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="39" selection-start="2261" selection-end="2261" vertical-scroll-proportion="0.0" vertical-offset="471" max-vertical-offset="2516">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="73" column="0" selection-start="2937" selection-end="2937" vertical-scroll-proportion="0.0" vertical-offset="589" max-vertical-offset="1258">
@@ -990,14 +983,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/CacheImageDownloader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="172" selection-end="172" vertical-scroll-proportion="0.19721578" vertical-offset="0" max-vertical-offset="431">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="287" column="36" selection-start="10355" selection-end="10362" vertical-scroll-proportion="0.24593967" vertical-offset="3838" max-vertical-offset="6613">
+        <state line="302" column="40" selection-start="10855" selection-end="10855" vertical-scroll-proportion="0.0" vertical-offset="3838" max-vertical-offset="6613">
           <folding>
             <element signature="e#7094#8221#0" expanded="true" />
             <element signature="e#8210#8211#0" expanded="true" />
             <element signature="e#10682#10690#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContactsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="0" selection-start="2686" selection-end="2686" vertical-scroll-proportion="0.41827768" vertical-offset="697" max-vertical-offset="2516">
+          <folding />
         </state>
       </provider>
     </entry>
