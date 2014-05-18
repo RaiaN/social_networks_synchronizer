@@ -2,6 +2,7 @@ package com.example.SocialNetworksSynchronizer;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.util.LruCache;
 import android.view.LayoutInflater;
@@ -66,14 +67,37 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> {
             holder.pbImage = (ImageView)view.findViewById(R.id.pb_icon);
             holder.vkImage = (ImageView)view.findViewById(R.id.vk_icon);
             holder.fbImage = (ImageView)view.findViewById(R.id.fb_icon);
+            view.setTag(holder);
         } else {
-            holder = (ViewHolder) view.getTag();
+            holder = (ViewHolder)view.getTag();
         }
 
         //задаём значение для трёх TextView
         holder.pbName.setText(contactsInfo.get(position).getPhonebookName());
-        holder.vkName.setText(contactsInfo.get(position).getVkName());
-        holder.fbName.setText(contactsInfo.get(position).getFbName());
+
+        Contact vkContact = contactsInfo.get(position).getVkContact();
+        Contact fbContact = contactsInfo.get(position).getFbContact();
+        if( vkContact != null ) {
+            holder.vkName.setText(contactsInfo.get(position).getVkName());
+            if( vkContact.getImage() != null ) {
+                Bitmap image = BitmapFactory.decodeByteArray(vkContact.getImage(), 0, vkContact.getImage().length);
+                holder.vkImage.setImageBitmap(image);
+            }
+        } else {
+            holder.vkName.setText("");
+            holder.vkImage.setImageBitmap(null);
+        }
+
+        if( fbContact != null ) {
+            holder.fbName.setText(contactsInfo.get(position).getFbName());
+            if( fbContact.getImage() != null ) {
+                Bitmap image = BitmapFactory.decodeByteArray(fbContact.getImage(), 0, fbContact.getImage().length);
+                holder.fbImage.setImageBitmap(image);
+            }
+        } else {
+            holder.fbName.setText("");
+            holder.fbImage.setImageBitmap(null);
+        }
 
         return view;
     }

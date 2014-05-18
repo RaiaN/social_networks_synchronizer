@@ -7,8 +7,9 @@
 
         <TextView
                 android:id="@+id/pb_contact_name"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="36dp"
+                android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/pb_icon"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -19,15 +20,19 @@
         <ImageView
                 android:id="@+id/pb_icon"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
+                android:layout_height="34dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/contact_icon" android:contentDescription="@string/phonebook_icon">
+                android:padding="-8dp"
+                android:layout_margin="1dp"
+                android:src="@drawable/contact_icon"
+                android:contentDescription="@string/phonebook_icon">
          </ImageView>
 
         <ImageView
                 android:id="@+id/vk_icon"
                 android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_height="34dp"
+                android:layout_margin="1dp"
                 android:layout_below="@+id/pb_contact_name"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/vke_icon"
@@ -52,6 +57,7 @@
                 android:id="@+id/fb_icon"
                 android:layout_width="36dp"
                 android:layout_height="34dp"
+                android:layout_margin="1dp"
                 android:layout_below="@+id/vk_icon"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/fb_icon"
