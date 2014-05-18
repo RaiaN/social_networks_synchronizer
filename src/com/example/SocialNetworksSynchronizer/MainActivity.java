@@ -1,12 +1,17 @@
 package com.example.SocialNetworksSynchronizer;
 
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
@@ -20,37 +25,39 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.vk.sdk.*;
 import com.vk.sdk.api.*;
+import org.json.JSONException;
 
 import java.util.*;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements AsyncTaskListener {
     private final String vkAppId = "4313814";   //Вконтакте, номер приложения
     //private final String fbAppId = "1416447705289612";
     //private VKAccessToken accessToken = null;
 
-    private ImageLoader loader = null;
-    private LruCache<String,Bitmap> bitmapCache = null;
+    public static Context context = null;
+    public static ImageLoader loader = null;
+    public static LruCache<String,Bitmap> bitmapCache = null;
 
     public final String[] permissions = new String[] { //Разрешения для ВК: друзья и не использовать HTTPS
             VKScope.FRIENDS,
             VKScope.NOHTTPS
     };
 
-    private final int SYNC_BTN_IND = 0; //кнопка Sync
-    private final int VK_BTN_IND   = 1; //кнопка VK friends
-    private final int FB_BTN_IND   = 2; //кнопка FB friends
-    private final int PB_BTN_IND   = 3; //кнопка Phonebook
-    private final int ST_BTN_IND   = 4; //кнопка Settings
-    private final int[] ACTNS_BTNS = new int[] { SYNC_BTN_IND, VK_BTN_IND, FB_BTN_IND, ST_BTN_IND };
+    public  static final int SYNC_BTN_IND = 0; //кнопка Sync
+    public  static final int VK_BTN_IND   = 1; //кнопка VK friends
+    public  static final int FB_BTN_IND   = 2; //кнопка FB friends
+    public  static final int PB_BTN_IND   = 3; //кнопка Phonebook
+    public  static final int ST_BTN_IND   = 4; //кнопка Settings
+    public  static final int []ACTNS_BTNS = new int[] { SYNC_BTN_IND, VK_BTN_IND, FB_BTN_IND, ST_BTN_IND };
 
     private Button[] buttons = new Button[ST_BTN_IND+1];
 
     private Phonebook phonebook = new Phonebook(this);
     private final DatabaseHandler handler = new DatabaseHandler(this);
 
-    private VkRequestThread vkThread = null;
-    private FbRequestThread fbThread = null;
-    private SyncContactsThread scThread = null;
+    private ParseResponseTask vkResponseTask = null;
+    private ParseResponseTask fbResponseTask = null;
+    private SyncContactsTask syncContactsTask = null;
 
     private ArrayList<Contact> vkFriends = new ArrayList<Contact>();
     private ArrayList<Contact> fbFriends = new ArrayList<Contact>();
@@ -110,6 +117,7 @@ public class MainActivity extends FragmentActivity {
 
         init();
         readSyncContactsFromDb();
+        context = getApplicationContext();
         prepareImageLoader();
         prepareCache();
     }
@@ -159,6 +167,16 @@ public class MainActivity extends FragmentActivity {
             }
         };
 
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 
     private void readSyncContactsFromDb() {
@@ -260,59 +278,18 @@ public class MainActivity extends FragmentActivity {
 
     //Синхронизация контактов c VK и FB
     private void sync() {
-        changeButtonsState(ACTNS_BTNS, false);
-
         vkLogin();
         fbLogin();
 
         if( !VKSdk.isLoggedIn() || !Session.getActiveSession().isOpened() ) {
-            changeButtonsState(ACTNS_BTNS, true);
             return;
         }
 
         this.setTitle("Синхронизация...");
 
         syncContacts.clear();
-        scThread = new SyncContactsThread(vkFriends, fbFriends, syncContacts, phonebook);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    scThread.start();
-                    scThread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                SQLiteDatabase db = handler.getWritableDatabase();
-                handler.dropTable(db);
-
-                int id = 0;
-                for(SyncContact sc: syncContacts) {
-                    ContentValues values = new ContentValues();
-                    values.put(DatabaseHandler.ID_COLUMN, id);
-                    values.put(DatabaseHandler.CONTACT, Serializer.serializeObject(sc));
-
-                    try {
-                        long resRowInd = db.insert(DatabaseHandler.TABLE_NAME, null, values);
-                        Log.e("INSERT QUERY ID", String.valueOf(resRowInd));
-                        id += 1;
-                    } catch( NullPointerException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                }
-                db.close();
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        MainActivity.this.setTitle("Синхронизация успешно завершена!");
-                        changeButtonsState(ACTNS_BTNS, true);
-                    }
-                });
-            }
-        }).start();
+        syncContactsTask = new SyncContactsTask(vkFriends, fbFriends, syncContacts, phonebook, handler, this);
+        syncContactsTask.execute();
     }
 
     public static ArrayList<String> getContactNames(ArrayList<Contact> friends) {
@@ -325,12 +302,11 @@ public class MainActivity extends FragmentActivity {
 
     //Отобразить список друзей ВК или FB
     public void showFriends(final ArrayList<Contact> friends) {
-        this.setTitle("Друзья"); /*TODO: add string with name of social network*/
         //Список, в котоый будем выводить имена друзей
         ListView lv = ((ListView)findViewById(R.id.lv));
 
         //задаём данные для списка, т.е. чем список будет заполняться
-        ListItemArrayAdapter adapter = new ListItemArrayAdapter(this, friends, bitmapCache, loader);
+        ListItemArrayAdapter adapter = new ListItemArrayAdapter(this, friends);
         lv.setAdapter(adapter);
 
         //если пользователь кликает на какой-либо элемент списка, то предоставить подробную информацию о данном пользователе
@@ -356,43 +332,32 @@ public class MainActivity extends FragmentActivity {
     //Сделать запрос на сервер ВК для получения списка друзей и отобразить результаты в ListView
     //Всё происходит через класс VkRequestTask
     private void performVkRequestAndShowResults() {
-        changeButtonsState(new int[]{ VK_BTN_IND }, false);
+        ((ListView)findViewById(R.id.lv)).setAdapter(null);
+        changeButtonsState(new int[]{VK_BTN_IND, FB_BTN_IND}, false);
 
         vkLogin();
         if( !VKSdk.isLoggedIn() ) {
             changeButtonsState(new int[]{ VK_BTN_IND }, true);
+            // tryToShowExistingContacts();
             return;
         }
 
-        this.setTitle("Получение списка друзей ВК...");
-
         VKRequest request = Requests.vkFriendsRequest(Requests.LOCALE_RUS);
-        vkThread = new VkRequestThread(vkFriends, request);
-
-        new Thread(new Runnable() {
+        request.executeWithListener(new VKRequest.VKRequestListener() {
             @Override
-            public void run() {
-                try{
-                    vkThread.start();
-                    vkThread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showFriends(vkFriends);
-                        changeButtonsState(new int[]{ VK_BTN_IND }, true);
-                    }
-                });
+            public void onComplete(VKResponse response) {
+                super.onComplete(response);
+                vkResponseTask = new ParseVkResponseTask(vkFriends, MainActivity.this, response);
+                vkResponseTask.setButtonIndexes(new int[]{ VK_BTN_IND, FB_BTN_IND });
+                vkResponseTask.execute();
             }
-        }).start();
+        });
     }
 
-    //Тоже самое для FB, в разработке
+    //Тоже самое для FB
     private void performFbRequestAndShowResults() {
-        changeButtonsState(new int[]{ FB_BTN_IND }, false);
+        ((ListView)findViewById(R.id.lv)).setAdapter(null);
+        changeButtonsState(new int[]{VK_BTN_IND, FB_BTN_IND}, false);
 
         fbLogin();
         if( !Session.getActiveSession().isOpened() ) {
@@ -400,30 +365,16 @@ public class MainActivity extends FragmentActivity {
             return;
         }
 
-        this.setTitle("Получение списка друзей FB...");
-
         Request request = Requests.fbFriendsRequest();
-        fbThread = new FbRequestThread(fbFriends, request);
-
-        new Thread(new Runnable() {
+        request.setCallback(new Request.Callback() {
             @Override
-            public void run() {
-                try{
-                    fbThread.start();
-                    fbThread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showFriends(fbFriends);
-                        changeButtonsState(new int[]{ FB_BTN_IND }, true);
-                    }
-                });
+            public void onCompleted(Response response) {
+                fbResponseTask = new ParseFbResponseTask(fbFriends, MainActivity.this, response);
+                fbResponseTask.setButtonIndexes(new int[]{ VK_BTN_IND, FB_BTN_IND });
+                fbResponseTask.execute();
             }
-        }).start();
+        });
+        request.executeAsync();
     }
 
     //Отобразить синхронизированный список контактов(пока только с ВК)
@@ -453,5 +404,45 @@ public class MainActivity extends FragmentActivity {
 
     private void showSettings() {
         startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    @Override
+    public void onTaskBegin(String caption, final int maxValue, final int []buttonIndexes ) {
+        setTitle(caption);
+
+        ((ProgressBar)findViewById(R.id.progress_bar)).setMax(maxValue);
+        ((ProgressBar)findViewById(R.id.progress_bar)).setProgress(0);
+        findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+
+        changeButtonsState(buttonIndexes, false);
+    }
+
+    @Override
+    public void onTaskProgress(int progress) {
+        ((ProgressBar)findViewById(R.id.progress_bar)).setProgress(progress);
+    }
+
+    @Override
+    public void onTaskCompleted(String caption, ArrayList<Contact> friends, final int []buttonIndexes) {
+        setTitle(caption);
+        showFriends(friends);
+
+        findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
+
+        changeButtonsState(buttonIndexes, true);
+    }
+
+    @Override
+    public void onTaskBegin(String caption, int []buttonIndexes) {
+        changeButtonsState(buttonIndexes, false);
+        setTitle(caption);
+    }
+
+    @Override
+    public void onTaskCompleted(String caption, final int []buttonIndexes) {
+        changeButtonsState(buttonIndexes, true);
+        setTitle(caption);
+
+        findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
     }
 }
