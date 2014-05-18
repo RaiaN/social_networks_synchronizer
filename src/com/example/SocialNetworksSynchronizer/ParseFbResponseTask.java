@@ -1,6 +1,5 @@
 package com.example.SocialNetworksSynchronizer;
 
-import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.model.GraphLocation;
 import com.facebook.model.GraphMultiResult;

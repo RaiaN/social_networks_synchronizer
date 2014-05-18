@@ -1,7 +1,6 @@
 package com.example.SocialNetworksSynchronizer;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -13,10 +12,13 @@ import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Queue;
-import java.util.concurrent.*;
 
 public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
+    private final String MAPPING_CAPTION = "Нахождение соответствий...";
+    private final String OK = "Ещё немного...";
+
     private ArrayList<Contact> vkFriends = null;
     private ArrayList<Contact> fbFriends = null;
     private ArrayList<SyncContact> syncContacts = null;
@@ -72,6 +74,9 @@ public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
         }
 
+        fillSyncContactsList();
+        storeSyncContacts();
+
         return null;
     }
 
@@ -86,38 +91,19 @@ public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        fillSyncContactsList();
-
-        SQLiteDatabase db = handler.getWritableDatabase();
-        handler.dropTable(db);
-
-        int id = 0;
-        for(SyncContact sc: syncContacts) {
-            ContentValues values = new ContentValues();
-            values.put(DatabaseHandler.ID_COLUMN, id);
-            values.put(DatabaseHandler.CONTACT, Serializer.serializeObject(sc));
-
-            try {
-                long resRowInd = db.insert(DatabaseHandler.TABLE_NAME, null, values);
-                Log.e("INSERT QUERY ID", String.valueOf(resRowInd));
-                id += 1;
-            } catch( NullPointerException e) {
-                e.printStackTrace();
-                return;
-            }
-        }
-        db.close();
-
-        listener.onTaskCompleted("Синхронизация успешно завершена.", MainActivity.ACTNS_BTNS);
+        listener.onTaskCompleted("Синхронизация завершена.", MainActivity.ACTNS_BTNS);
     }
 
     private int findSimilarContact(String currentName, ArrayList<String> names) {
+        String qwe = Translit.toTranslit(currentName);
         //В цикле пройтись по всем друзьям ВК и выяснить, есть ли контакт с таким же именем(phonebookName)
         for (int vkInd = 0; vkInd < names.size(); ++vkInd) {
             String[] components = names.get(vkInd).split(" ");
             int containsCount = 0;
-            for (int compInd = 0; compInd < components.length; ++compInd) {
-                if (currentName.contains(components[compInd])) {
+            for( String component: components ) {
+                if( currentName.contains(component) ||
+                    qwe.contains(component))
+                {
                     ++containsCount;
                 }
             }
@@ -129,10 +115,33 @@ public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
         return -1;
     }
 
+    private ArrayList<String> getContactNames(ArrayList<Contact> friends) {
+        ArrayList<String> friendNames = new ArrayList<String>();
+        for(Contact c: friends) {
+            friendNames.add(c.getName());
+        }
+        return friendNames;
+    }
+
     private void fillSyncContactsList() {
-        ArrayList<String> vkNames = MainActivity.getContactNames(vkFriends);
-        ArrayList<String> fbNames = MainActivity.getContactNames(fbFriends);
+        ArrayList<String> vkNames = getContactNames(vkFriends);
+        boolean []vkNamesUsed = new boolean[vkNames.size()];
+        Arrays.fill(vkNamesUsed, false);
+
+        ArrayList<String> fbNames = getContactNames(fbFriends);
+        boolean []fbNamesUsed = new boolean[fbNames.size()];
+        Arrays.fill(fbNamesUsed, false);
+
         Queue<String> phonebookNames = phonebook.getContactNames();
+        syncContacts.clear();
+
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                listener.onTaskBegin(MAPPING_CAPTION, phonebook.getContactNames().size(), new int[]{});
+            }
+        });
 
         while (!phonebookNames.isEmpty()) {
             //Создаём новый SyncContact. SyncContact.java для подробностей
@@ -146,6 +155,7 @@ public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
             int pos = findSimilarContact(currentName, vkNames);
             if( pos != -1 ) {
                 item.setVkContact(vkFriends.get(pos));
+                vkNamesUsed[pos] = true;
             } else {
                 item.setVkContact(null);
             }
@@ -153,12 +163,61 @@ public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
             pos = findSimilarContact(currentName, fbNames);
             if( pos != -1 ) {
                 item.setFbContact(fbFriends.get(pos));
+                fbNamesUsed[pos] = true;
             } else {
                 item.setFbContact(null);
             }
 
             //добавить item в синхронизированный список контактов
             syncContacts.add(item);
+            listener.onTaskProgress(syncContacts.size());
         }
+
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                listener.onTaskCompleted(OK, new int[]{});
+            }
+        });
+
+        for( int i = 0; i < vkNamesUsed.length; ++i ) {
+            if( !vkNamesUsed[i] ) {
+                SyncContact item = new SyncContact();
+                item.setPhonebookName("");
+                item.setVkContact(vkFriends.get(i));
+                item.setFbContact(null);
+                syncContacts.add(item);
+            }
+        }
+
+        for( int i = 0; i < fbNamesUsed.length; ++i ) {
+            if( !fbNamesUsed[i] ) {
+                SyncContact item = new SyncContact();
+                item.setPhonebookName("");
+                item.setVkContact(null);
+                item.setFbContact(fbFriends.get(i));
+                syncContacts.add(item);
+            }
+        }
+    }
+
+    void storeSyncContacts() {
+        SQLiteDatabase db = handler.getWritableDatabase();
+        if( db == null ) {
+            return;
+        }
+        handler.dropTable(db);
+
+        int id = 0;
+        for(SyncContact sc: syncContacts) {
+            ContentValues values = new ContentValues();
+            values.put(DatabaseHandler.ID_COLUMN, id);
+            values.put(DatabaseHandler.CONTACT, Serializer.serializeObject(sc));
+
+            long resRowInd = db.insert(DatabaseHandler.TABLE_NAME, null, values);
+            Log.e("INSERT QUERY ID", String.valueOf(resRowInd));
+            id += 1;
+        }
+        db.close();
     }
 }

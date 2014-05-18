@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+
 public class ParseResponseTask extends AsyncTask<Void, Integer, Void> {
     protected ArrayList<Contact> friends = null;
     protected AsyncTaskListener listener = null;
@@ -40,8 +41,7 @@ public class ParseResponseTask extends AsyncTask<Void, Integer, Void> {
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bm.compress(Bitmap.CompressFormat.PNG, 90, stream);
-            byte[] byteArray = stream.toByteArray();
-            return  byteArray;
+            return stream.toByteArray();
         } catch (IOException ioe ) {
             ioe.printStackTrace();
         }

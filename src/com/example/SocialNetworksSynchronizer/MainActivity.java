@@ -1,9 +1,5 @@
 package com.example.SocialNetworksSynchronizer;
 
-import android.app.Dialog;
-import android.app.DownloadManager;
-import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,11 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.text.Html;
-import android.util.Log;
 import android.util.LruCache;
 import android.view.View;
 import android.widget.*;
@@ -25,14 +18,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.vk.sdk.*;
 import com.vk.sdk.api.*;
-import org.json.JSONException;
 
 import java.util.*;
 
 public class MainActivity extends FragmentActivity implements AsyncTaskListener {
     private final String vkAppId = "4313814";   //Вконтакте, номер приложения
-    //private final String fbAppId = "1416447705289612";
-    //private VKAccessToken accessToken = null;
 
     public static Context context = null;
     public static ImageLoader loader = null;
@@ -75,37 +65,37 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
         buttons[ST_BTN_IND] = (Button)findViewById(R.id.settings_button);
 
         //Задаём обработчики события нажатия на кнопку для каждой кнопки
-        ((Button)findViewById(R.id.sync_button)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.sync_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sync();
             }
         });
-        ((Button)findViewById(R.id.vk_friends_button)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.vk_friends_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 performVkRequestAndShowResults();
             }
         });
-        ((Button)findViewById(R.id.fb_friends_button)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fb_friends_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 performFbRequestAndShowResults();
             }
         });
-        ((Button)findViewById(R.id.phonebook_button)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.phonebook_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 makePhonebook();
             }
         });
-        ((Button)findViewById(R.id.settings_button)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.settings_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showSettings();
             }
         });
-        ((Button)findViewById(R.id.logout_button)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 VKSdk.logout();
@@ -170,13 +160,10 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
     }
 
     public boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
+
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     private void readSyncContactsFromDb() {
@@ -185,14 +172,20 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             public void run() {
                 changeButtonsState(ACTNS_BTNS, false);
                 SQLiteDatabase db = handler.getReadableDatabase();
+                if( db == null ) {
+                    return;
+                }
                 handler.onCreate(db);
                 String[] projection = {
-                        DatabaseHandler.ID_COLUMN,
-                        DatabaseHandler.CONTACT
+                    DatabaseHandler.ID_COLUMN,
+                    DatabaseHandler.CONTACT
                 };
 
                 try {
                     Cursor cursor = db.query(DatabaseHandler.TABLE_NAME, projection, null, null, null, null, null);
+                    if( cursor == null ) {
+                        return;
+                    }
                     while( cursor.moveToNext() ) {
                         byte[] b = cursor.getBlob(cursor.getColumnIndex(DatabaseHandler.CONTACT));
                         SyncContact contact = (SyncContact)Serializer.deserializeObject(b);
@@ -201,6 +194,16 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
                     cursor.close();
                     db.close();
 
+                    vkFriends.clear();
+                    fbFriends.clear();
+                    for( SyncContact contact: syncContacts ) {
+                        if( contact.getVkContact() != null ) {
+                            vkFriends.add(contact.getVkContact());
+                        }
+                        if( contact.getFbContact() != null ) {
+                            fbFriends.add(contact.getFbContact());
+                        }
+                    }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                     return;
@@ -246,7 +249,7 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
     }
 
     private void fbLogin() {
-        if( (Session.getActiveSession() != null) &&Session.getActiveSession().isOpened() ) {
+        if( (Session.getActiveSession() != null) && Session.getActiveSession().isOpened() ) {
             return;
         }
 
@@ -254,14 +257,18 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
         Session.openActiveSession(this, true,new Session.StatusCallback() {
             @Override
             public void call(Session session, SessionState state, Exception exception) {
-                if (session.isOpened()) { }
+
             }
         });
     }
 
     private void init() {
-        vkLogin();
-        fbLogin();
+        if( isOnline() ) {
+            vkLogin();
+        }
+        if( isOnline() ) {
+            fbLogin();
+        }
     }
 
     private void changeButtonsState(final int[] indexes, final boolean enabled) {
@@ -278,6 +285,10 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
 
     //Синхронизация контактов c VK и FB
     private void sync() {
+        if( !isOnline() ) {
+            setTitle("Нет подключения к интернету");
+            return;
+        }
         vkLogin();
         fbLogin();
 
@@ -287,17 +298,10 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
 
         this.setTitle("Синхронизация...");
 
+        ((ListView)findViewById(R.id.lv)).setAdapter(null);
         syncContacts.clear();
         syncContactsTask = new SyncContactsTask(vkFriends, fbFriends, syncContacts, phonebook, handler, this);
         syncContactsTask.execute();
-    }
-
-    public static ArrayList<String> getContactNames(ArrayList<Contact> friends) {
-        ArrayList<String> friendNames = new ArrayList<String>();
-        for(Contact c: friends) {
-            friendNames.add(c.getName());
-        }
-        return friendNames;
     }
 
     //Отобразить список друзей ВК или FB
@@ -333,12 +337,16 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
     //Всё происходит через класс VkRequestTask
     private void performVkRequestAndShowResults() {
         ((ListView)findViewById(R.id.lv)).setAdapter(null);
-        changeButtonsState(new int[]{VK_BTN_IND, FB_BTN_IND}, false);
 
-        vkLogin();
+        if( isOnline() ) {
+            vkLogin();
+        } else {
+            showFriends(vkFriends);
+            return;
+        }
+
         if( !VKSdk.isLoggedIn() ) {
-            changeButtonsState(new int[]{ VK_BTN_IND }, true);
-            // tryToShowExistingContacts();
+            showFriends(vkFriends);
             return;
         }
 
@@ -348,7 +356,7 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             public void onComplete(VKResponse response) {
                 super.onComplete(response);
                 vkResponseTask = new ParseVkResponseTask(vkFriends, MainActivity.this, response);
-                vkResponseTask.setButtonIndexes(new int[]{ VK_BTN_IND, FB_BTN_IND });
+                vkResponseTask.setButtonIndexes(ACTNS_BTNS);
                 vkResponseTask.execute();
             }
         });
@@ -357,11 +365,15 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
     //Тоже самое для FB
     private void performFbRequestAndShowResults() {
         ((ListView)findViewById(R.id.lv)).setAdapter(null);
-        changeButtonsState(new int[]{VK_BTN_IND, FB_BTN_IND}, false);
 
-        fbLogin();
+        if( isOnline() ) {
+            fbLogin();
+        } else {
+            showFriends(fbFriends);
+            return;
+        }
         if( !Session.getActiveSession().isOpened() ) {
-            changeButtonsState(new int[]{ FB_BTN_IND }, true);
+            showFriends(fbFriends);
             return;
         }
 
@@ -370,7 +382,7 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             @Override
             public void onCompleted(Response response) {
                 fbResponseTask = new ParseFbResponseTask(fbFriends, MainActivity.this, response);
-                fbResponseTask.setButtonIndexes(new int[]{ VK_BTN_IND, FB_BTN_IND });
+                fbResponseTask.setButtonIndexes(ACTNS_BTNS);
                 fbResponseTask.execute();
             }
         });
@@ -397,7 +409,7 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             }
         }
         //Создаём адаптер для отображения данных в ListView
-        ContactArrayAdapter adapter = new ContactArrayAdapter(this, syncContacts, bitmapCache, loader);
+        ContactArrayAdapter adapter = new ContactArrayAdapter(this, syncContacts, bitmapCache);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(null);
     }

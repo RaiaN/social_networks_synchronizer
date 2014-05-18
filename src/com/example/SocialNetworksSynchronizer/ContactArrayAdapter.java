@@ -3,7 +3,6 @@ package com.example.SocialNetworksSynchronizer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,6 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> {
     private final Context context;
     private final ArrayList<SyncContact> contactsInfo;
     private final LruCache<String, Bitmap> bitmapCache;
-    private final ImageLoader loader;
 
     private class ViewHolder {
         public TextView pbName;
@@ -38,15 +36,24 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> {
 
     }
 
+    private void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+        if (getBitmapFromMemCache(key) == null) {
+            bitmapCache.put(key, bitmap);
+        }
+    }
+
+    private Bitmap getBitmapFromMemCache(String key) {
+        return bitmapCache.get(key);
+    }
+
     //Конструктор, куда передаём текущий контекст и синхронизированный список друзей
     public ContactArrayAdapter(Context context, ArrayList<SyncContact> contactsInfo, LruCache<String,
-                               Bitmap> bitmapCache, ImageLoader loader) {
+                               Bitmap> bitmapCache) {
         super(context, R.layout.phonebook_contact, contactsInfo);
 
         this.context = context;
         this.contactsInfo = contactsInfo;
         this.bitmapCache = bitmapCache;
-        this.loader = loader;
     }
 
     //Данный метод изменяет поведение оригинального метода отображения элементов ListView с целью
@@ -77,28 +84,40 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> {
 
         Contact vkContact = contactsInfo.get(position).getVkContact();
         Contact fbContact = contactsInfo.get(position).getFbContact();
+
         if( vkContact != null ) {
             holder.vkName.setText(contactsInfo.get(position).getVkName());
-            if( vkContact.getImage() != null ) {
-                Bitmap image = BitmapFactory.decodeByteArray(vkContact.getImage(), 0, vkContact.getImage().length);
-                holder.vkImage.setImageBitmap(image);
-            }
+            setImage(vkContact, holder.vkImage);
         } else {
             holder.vkName.setText("");
-            holder.vkImage.setImageBitmap(null);
+            holder.vkImage.setImageDrawable(context.getResources().getDrawable( R.drawable.vke_icon));
         }
 
         if( fbContact != null ) {
             holder.fbName.setText(contactsInfo.get(position).getFbName());
-            if( fbContact.getImage() != null ) {
-                Bitmap image = BitmapFactory.decodeByteArray(fbContact.getImage(), 0, fbContact.getImage().length);
-                holder.fbImage.setImageBitmap(image);
-            }
+            setImage(fbContact, holder.fbImage);
         } else {
             holder.fbName.setText("");
-            holder.fbImage.setImageBitmap(null);
+            holder.fbImage.setImageDrawable(context.getResources().getDrawable( R.drawable.fb_icon));
         }
 
         return view;
+    }
+
+    private void setImage(Contact contact, ImageView iv) {
+        if( contact.getImage() != null ) {
+            Bitmap image = getBitmapFromMemCache(contact.getPhotoUrl());
+            if( image != null ) {
+                iv.setImageBitmap(image);
+            } else {
+                if( contact.getImage() != null) {
+                    image = BitmapFactory.decodeByteArray(contact.getImage(), 0, contact.getImage().length);
+                    if( image != null) {
+                        addBitmapToMemoryCache(contact.getPhotoUrl(), image);
+                        iv.setImageBitmap(image);
+                    }
+                }
+            }
+        }
     }
 }

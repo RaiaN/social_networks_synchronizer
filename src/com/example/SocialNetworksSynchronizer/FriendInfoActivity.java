@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -34,7 +33,11 @@ public class FriendInfoActivity extends Activity {
 
         List<String> values = new ArrayList<String>();
         for( int fieldInd = 0; fieldInd < Contact.FIELDS.length; ++fieldInd ) {
-            if( intent.getStringExtra(Contact.FIELDS[fieldInd]).length() > 0 ) {
+            String field  = intent.getStringExtra(Contact.FIELDS[fieldInd]);
+            if( field == null ) {
+                continue;
+            }
+            if( field.length() > 0 ) {
                 String param = "";
                 if( Contact.FIELDS[fieldInd].compareTo(Contact.BIRTHDAY) == 0 ) {
                     param += "День рождения:\n";
