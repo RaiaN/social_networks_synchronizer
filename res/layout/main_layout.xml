@@ -10,18 +10,27 @@
                 android:id="@+id/search_field"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:focusable="false"
+                android:gravity="center"
                 android:layout_margin="3dip"
                 android:textColor="@color/black"
                 android:background="@drawable/rounded_edittext" android:inputType="text">
         </EditText>
+
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_field"
+                android:visibility="invisible">
+        </ProgressBar>
 
         <ListView
                 android:id="@+id/lv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/search_field"
-                android:layout_above="@+id/buttons_layout"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="6.0sp">
         </ListView>

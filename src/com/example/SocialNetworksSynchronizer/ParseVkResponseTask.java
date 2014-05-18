@@ -1,27 +1,56 @@
 package com.example.SocialNetworksSynchronizer;
 
-import android.os.AsyncTask;
-import android.text.TextUtils;
-import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
-public class VkRequestThread extends Thread {
-    private ArrayList<Contact> vkFriends = null;
-    private VKRequest request = null;
-    public boolean finished = false;
+public class ParseVkResponseTask extends ParseResponseTask {
+    private String VK_START_CAPTION = "Получение списка друзей ВК...";
+    private String VK_END_CAPTION   = "Друзья ВК";
 
-    VkRequestThread(ArrayList<Contact> vkFriends, VKRequest request) {
-        this.vkFriends = vkFriends;
-        this.request = request;
+    private VKResponse response = null;
+
+    ParseVkResponseTask(ArrayList<Contact> friends, AsyncTaskListener listener, VKResponse response) {
+        super(friends, listener);
+        this.response = response;
+    }
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        try {
+            makeVkFriendsList();
+        } catch( JSONException e ) {
+            e.printStackTrace();
+            this.cancel(true);
+            return null;
+        }
+
+        return super.doInBackground(voids);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        try {
+            maxValue = response.json.getJSONObject("response").getJSONArray("items").length() + 1;
+        } catch( JSONException je ) {
+            je.printStackTrace();
+        }
+        caption = VK_START_CAPTION;
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(Void v) {
+        caption = VK_END_CAPTION;
+        super.onPostExecute(v);
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
     }
 
     //Проверить номер телефона
@@ -56,7 +85,7 @@ public class VkRequestThread extends Thread {
 
         String birthday = "";
         if( res.getJSONObject(i).has(Requests.VK_BIRTHDATE) &&
-            res.getJSONObject(i).getString(Requests.VK_BIRTHDATE).length() > 0 ) {
+                res.getJSONObject(i).getString(Requests.VK_BIRTHDATE).length() > 0 ) {
             birthday = res.getJSONObject(i).getString(Requests.VK_BIRTHDATE);
         }
 
@@ -123,7 +152,7 @@ public class VkRequestThread extends Thread {
             }
         }
 
-        HashMap <String,String> contactInfo = new HashMap<String, String>();
+        HashMap<String,String> contactInfo = new HashMap<String, String>();
         contactInfo.put(Contact.PHOTO_URL, photoUrl);
         contactInfo.put(Contact.NAME, fullName);
         contactInfo.put(Contact.BIRTHDAY, birthday);
@@ -136,29 +165,13 @@ public class VkRequestThread extends Thread {
         contactInfo.put(Contact.EDUCATION, education);
 
         Contact contact = new Contact(contactInfo);
+        contact.setImage(loadImage(photoUrl));
 
         return contact;
     }
 
-    private void loadImages() {
-        List <String> urls = new ArrayList<String>();
-        for(Contact contact: vkFriends) {
-            urls.add(contact.getPhotoUrl());
-        }
-
-        List <byte[]> avatars = new ArrayList<byte[]>();
-        AsyncTask at = new DownloadImageTask(avatars).execute(TextUtils.join(",", urls));
-        while( !((DownloadImageTask)at).finished ) {}
-
-        for( int i = 0; i < avatars.size(); ++i ) {
-            byte []bytesImage = avatars.get(i);
-            vkFriends.get(i).setImage(bytesImage);
-        }
-    }
-
-    //Заполнить/обновить список друзей ВК
-    public void makeVkFriendsList(VKResponse response) throws JSONException {
-        vkFriends.clear();
+    public void makeVkFriendsList() throws JSONException {
+        friends.clear();
         //Получить результат ответа сервера в виде JSONArray
         JSONArray res = response.json.getJSONObject("response").getJSONArray("items");
 
@@ -168,26 +181,8 @@ public class VkRequestThread extends Thread {
             //Формируем новый Contact используя fullName, mobilePhone, homePhone и address
             //Подробно в файле Contact.java
             Contact contact = getVkContact(res, i);
-            vkFriends.add(contact);
+            friends.add(contact);
+            publishProgress(i+1);
         }
-
-        //loadImages();
-    }
-
-    @Override
-    public synchronized void start() {
-        super.start();
-        request.executeWithListener(new VKRequest.VKRequestListener() {
-            @Override
-            public void onComplete(VKResponse response) {
-                super.onComplete(response);
-                try {
-                    makeVkFriendsList(response);
-                    finished = true;
-                } catch (JSONException e ) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 }

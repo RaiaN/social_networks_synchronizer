@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 
 public class ListItemArrayAdapter extends ArrayAdapter<Contact> {
@@ -24,7 +23,6 @@ public class ListItemArrayAdapter extends ArrayAdapter<Contact> {
     }
 
     private final LruCache<String, Bitmap> bitmapCache;
-    private final ImageLoader loader;
 
     private void addBitmapToMemoryCache(String key, Bitmap bitmap) {
         if (getBitmapFromMemCache(key) == null) {
@@ -36,14 +34,12 @@ public class ListItemArrayAdapter extends ArrayAdapter<Contact> {
         return bitmapCache.get(key);
     }
 
-    public ListItemArrayAdapter(Context context,  ArrayList<Contact> contactsInfo, LruCache<String,
-                                Bitmap> bitmapCache, ImageLoader loader) {
+    public ListItemArrayAdapter(Context context,  ArrayList<Contact> contactsInfo) {
         super(context, R.layout.list_item, contactsInfo);
 
         this.context = context;
         this.contactsInfo = contactsInfo;
-        this.bitmapCache = bitmapCache;
-        this.loader = loader;
+        this.bitmapCache = MainActivity.bitmapCache;
     }
 
     @Override
@@ -76,8 +72,6 @@ public class ListItemArrayAdapter extends ArrayAdapter<Contact> {
                     addBitmapToMemoryCache(photoUrl, image);
                     holder.image.setImageBitmap(image);
                 }
-            } else {
-                loader.displayImage(photoUrl, holder.image);
             }
         }
 
