@@ -4,18 +4,19 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@color/vk_grey_color">
+              android:background="@color/vk_grey_color"
+              android:descendantFocusability="beforeDescendants"
+              android:focusableInTouchMode="true">
 
-        <EditText
+        <SearchView
                 android:id="@+id/search_field"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dip"
+                android:layout_margin="-4dip"
                 android:gravity="center"
-                android:focusable="true"
                 android:textColor="@color/black"
-                android:background="@drawable/rounded_edittext" android:inputType="text">
-        </EditText>
+                android:background="@drawable/rounded_edittext">
+        </SearchView>
 
         <ProgressBar
                 android:id="@+id/progress_bar"
@@ -24,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/search_field"
                 android:visibility="invisible">
+            <requestFocus />
         </ProgressBar>
 
         <ListView

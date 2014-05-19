@@ -44,9 +44,8 @@ public class Requests {
     public static String FB_BIRTHDATE = "birthday";
     public static String FB_EDUCATION = "education";
     public static String FB_ADDRESS   = "location";
-    public static String FB_WORK      = "work";
 
-    public static String []FB_ALL = new String[]{ FB_BIRTHDATE, FB_EDUCATION, FB_ADDRESS, FB_WORK };
+    public static String []FB_ALL = new String[]{ FB_BIRTHDATE, FB_EDUCATION, FB_ADDRESS };
     public static String FB_REQUEST_FIELDS = FB_NAME + "," + FB_PHOTO + "," + TextUtils.join(",", FB_ALL);
 
     //функция формирования запроса для получения информации о друзьях в ВК

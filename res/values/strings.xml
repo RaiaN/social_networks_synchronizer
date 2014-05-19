@@ -23,5 +23,17 @@
     <string name="address">Контактный адрес</string>
     <string name="work">Место работы</string>
     <string name="apply">ОК</string>
+    <string name="help_dialog_text">
+    <![CDATA[
+        <br><b>
+         1) Sync - синхронизация с социальными сетями и нахождение соответствий между контактами <br><br>
+         2) VK friends - отображение друзей VKontakte <br><br>
+         3) FB friends - отображение друзей Facebook <br><br>
+         4) Contacts - отображение синхронизированной телефонной книги <br><br>
+         5) Settings - задание настроек для синхронизации<br><br>
+         6) Exit - выход из приложения <br>
+         <b><br>
+    ]]>
+    </string>
 
 </resources>

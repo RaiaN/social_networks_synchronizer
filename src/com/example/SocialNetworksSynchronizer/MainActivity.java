@@ -1,5 +1,6 @@
 package com.example.SocialNetworksSynchronizer;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,11 +13,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.LruCache;
 import android.util.Pair;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.*;
 import com.facebook.*;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -25,6 +30,10 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.vk.sdk.*;
 import com.vk.sdk.api.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class MainActivity extends FragmentActivity implements AsyncTaskListener {
@@ -65,9 +74,8 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_LEFT_ICON);
         setContentView(R.layout.main_layout);  //устанавливаем Layout для текущей активити (файл main_layout.xml)
-
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         buttons[SYNC_BTN_IND] = (Button)findViewById(R.id.sync_button);
         buttons[VK_BTN_IND] = (Button)findViewById(R.id.vk_friends_button);
@@ -114,6 +122,7 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             }
         });
 
+
         //вызываем функцию для авторизации пользователя в ВК и FB
 
         init();
@@ -121,6 +130,7 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
         context = getApplicationContext();
         prepareImageLoader();
         prepareCache();
+        prepareApplicationHelp();
     }
 
     //Следующие 3 метода нужны для корректной работы с VkSDK и FacebookSDK
@@ -140,7 +150,9 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         VKUIHelper.onActivityResult(requestCode, resultCode, data);
-        Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+        if( Session.getActiveSession() != null ) {
+            Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+        }
     }
 
     private void prepareImageLoader() {
@@ -167,7 +179,40 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
                 return bitmap.getByteCount() / 1024;
             }
         };
+    }
 
+    private String readRawTextFile(int id) {
+        InputStream inputStream = getResources().openRawResource(id);
+        InputStreamReader in = new InputStreamReader(inputStream);
+        BufferedReader buf = new BufferedReader(in);
+        String line;
+        StringBuilder text = new StringBuilder();
+        try {
+            while (( line = buf.readLine()) != null)
+                text.append(line);
+        } catch (IOException e) {
+            return null;
+        }
+        return text.toString();
+    }
+
+    private void prepareApplicationHelp() {
+        View v = findViewById (android.R.id.title);
+        v.setClickable(true);
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.help_dialog_layout);
+                TextView tv = (TextView)dialog.findViewById(R.id.help_text_view);
+                Spanned helpText = Html.fromHtml(getString(R.string.help_dialog_text));
+                tv.setText(helpText);
+                dialog.setTitle("Работа с приложением");
+                dialog.setCancelable(true);
+
+                dialog.show();
+            }
+        });
     }
 
     public boolean isOnline() {
@@ -351,22 +396,19 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             }
         });
 
-        ((TextView)findViewById(R.id.search_field)).addTextChangedListener(new TextWatcher() {
+
+        ((SearchView)findViewById(R.id.search_field)).setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                if (charSequence.toString().equals(" ") ) {
-                    adapter.getFilter().filter(charSequence);
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String constraint) {
+                if( !constraint.equals(" ")) {
+                    adapter.getFilter().filter(constraint);
                 }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
+                return false;
             }
         });
     }
@@ -379,7 +421,11 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
         if( isOnline() ) {
             vkLogin();
         } else {
-            showFriends(vkFriends);
+            if( vkFriends.size() > 0 ) {
+                showFriends(vkFriends);
+            } else {
+                setTitle("Нет подключения к сети интернет");
+            }
             return;
         }
 
@@ -388,16 +434,20 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             return;
         }
 
-        VKRequest request = Requests.vkFriendsRequest(Requests.LOCALE_RUS);
-        request.executeWithListener(new VKRequest.VKRequestListener() {
-            @Override
-            public void onComplete(VKResponse response) {
-                super.onComplete(response);
-                vkResponseTask = new ParseVkResponseTask(vkFriends, MainActivity.this, response);
-                vkResponseTask.setButtonIndexes(ACTNS_BTNS);
-                vkResponseTask.execute();
-            }
-        });
+        if( isOnline() ) {
+            VKRequest request = Requests.vkFriendsRequest(Requests.LOCALE_RUS);
+            request.executeWithListener(new VKRequest.VKRequestListener() {
+                @Override
+                public void onComplete(VKResponse response) {
+                    super.onComplete(response);
+                    vkResponseTask = new ParseVkResponseTask(vkFriends, MainActivity.this, response);
+                    vkResponseTask.setButtonIndexes(ACTNS_BTNS);
+                    vkResponseTask.execute();
+                }
+            });
+        } else {
+            setTitle("Нет подключения к интернету!");
+        }
     }
 
     //Тоже самое для FB
@@ -407,7 +457,11 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
         if( isOnline() ) {
             fbLogin();
         } else {
-            showFriends(fbFriends);
+            if( fbFriends.size() > 0 ) {
+                showFriends(fbFriends);
+            } else {
+                setTitle("Нет подключения к сети интернет");
+            }
             return;
         }
         if( !Session.getActiveSession().isOpened() ) {
@@ -415,16 +469,20 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             return;
         }
 
-        Request request = Requests.fbFriendsRequest();
-        request.setCallback(new Request.Callback() {
-            @Override
-            public void onCompleted(Response response) {
-                fbResponseTask = new ParseFbResponseTask(fbFriends, MainActivity.this, response);
-                fbResponseTask.setButtonIndexes(ACTNS_BTNS);
-                fbResponseTask.execute();
-            }
-        });
-        request.executeAsync();
+        if( isOnline() ) {
+            Request request = Requests.fbFriendsRequest();
+            request.setCallback(new Request.Callback() {
+                @Override
+                public void onCompleted(Response response) {
+                    fbResponseTask = new ParseFbResponseTask(fbFriends, MainActivity.this, response);
+                    fbResponseTask.setButtonIndexes(ACTNS_BTNS);
+                    fbResponseTask.execute();
+                }
+            });
+            request.executeAsync();
+        } else {
+            setTitle("Нет подключения к интернету!");
+        }
     }
 
     //вызов номера телефона
@@ -457,8 +515,8 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             }
         }
         //Создаём адаптер для отображения данных в ListView
-        ContactArrayAdapter adapter = new ContactArrayAdapter(this, syncContacts, bitmapCache);
-        lv.setAdapter(adapter);
+        pbAdapter = new ContactArrayAdapter(this, syncContacts, bitmapCache);
+        lv.setAdapter(pbAdapter);
         lv.setOnItemClickListener(null);
 
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -478,22 +536,18 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             }
         });
 
-        ((TextView)findViewById(R.id.search_field)).addTextChangedListener(new TextWatcher() {
+        ((SearchView)findViewById(R.id.search_field)).setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                if (charSequence.toString().equals(" ") ) {
-                    pbAdapter.getFilter().filter(charSequence);
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String constraint) {
+                if( !constraint.equals(" ") ) {
+                    pbAdapter.getFilter().filter(constraint);
                 }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
+                return false;
             }
         });
     }

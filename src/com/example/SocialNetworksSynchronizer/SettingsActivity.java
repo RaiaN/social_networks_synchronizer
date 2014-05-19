@@ -30,7 +30,6 @@ public class SettingsActivity extends Activity {
         fbSwitches.put(Requests.FB_BIRTHDATE, (Switch)findViewById(R.id.birthday_switch_fb));
         fbSwitches.put(Requests.FB_EDUCATION, (Switch)findViewById(R.id.education_switch_fb));
         fbSwitches.put(Requests.FB_ADDRESS, (Switch) findViewById(R.id.address_switch_fb));
-        fbSwitches.put(Requests.FB_WORK, (Switch)findViewById(R.id.work_switch_fb));
 
         restoreSwitches();
 

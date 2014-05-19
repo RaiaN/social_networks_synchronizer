@@ -81,13 +81,13 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> implements Fi
 
         if( position < filteredContactsInfo.size() ) {
             //задаём значение для трёх TextView
-            holder.pbName.setText(contactsInfo.get(position).getPhonebookName());
+            holder.pbName.setText(filteredContactsInfo.get(position).getPhonebookName());
 
-            Contact vkContact = contactsInfo.get(position).getVkContact();
-            Contact fbContact = contactsInfo.get(position).getFbContact();
+            Contact vkContact = filteredContactsInfo.get(position).getVkContact();
+            Contact fbContact = filteredContactsInfo.get(position).getFbContact();
 
             if( vkContact != null ) {
-                holder.vkName.setText(contactsInfo.get(position).getVkName());
+                holder.vkName.setText(filteredContactsInfo.get(position).getVkName());
                 setImage(vkContact, holder.vkImage);
             } else {
                 holder.vkName.setText("");
@@ -95,7 +95,7 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> implements Fi
             }
 
             if( fbContact != null ) {
-                holder.fbName.setText(contactsInfo.get(position).getFbName());
+                holder.fbName.setText(filteredContactsInfo.get(position).getFbName());
                 setImage(fbContact, holder.fbImage);
             } else {
                 holder.fbName.setText("");
@@ -105,7 +105,7 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> implements Fi
             holder.pbName.setText("");
             holder.pbImage.setImageDrawable(null);
             holder.vkImage.setImageDrawable(null);
-            holder.pbImage.setImageDrawable(null);
+            holder.fbImage.setImageDrawable(null);
         }
 
         return view;
@@ -165,6 +165,10 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> implements Fi
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                if( filterResults.count == 0 ) {
+                    notifyDataSetInvalidated();
+                    return;
+                }
                 filteredContactsInfo = (ArrayList<SyncContact>)filterResults.values;
 
                 notifyDataSetChanged();
