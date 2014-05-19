@@ -1,7 +1,6 @@
 package com.example.SocialNetworksSynchronizer;
 
 import android.util.Log;
-
 import java.io.*;
 
 public final class Serializer {
@@ -11,10 +10,8 @@ public final class Serializer {
             ObjectOutput out = new ObjectOutputStream(bos);
             out.writeObject(o);
             out.close();
-            //
-            byte[] buf = bos.toByteArray();
 
-            return buf;
+            return bos.toByteArray();
         } catch(IOException ioe) {
             Log.e("serializeObject", "error", ioe);
             return null;

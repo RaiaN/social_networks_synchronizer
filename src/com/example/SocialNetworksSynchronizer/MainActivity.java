@@ -7,10 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.LruCache;
+import android.util.Pair;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.*;
 import com.facebook.*;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -53,10 +59,15 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
     private ArrayList<Contact> fbFriends = new ArrayList<Contact>();
     private ArrayList<SyncContact> syncContacts = new ArrayList<SyncContact>();   //SyncContact.java, синхронизированный список друзей
 
+    ListItemArrayAdapter adapter = null;
+    ContactArrayAdapter pbAdapter = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);  //устанавливаем Layout для текущей активити (файл main_layout.xml)
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         buttons[SYNC_BTN_IND] = (Button)findViewById(R.id.sync_button);
         buttons[VK_BTN_IND] = (Button)findViewById(R.id.vk_friends_button);
@@ -189,7 +200,9 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
                     while( cursor.moveToNext() ) {
                         byte[] b = cursor.getBlob(cursor.getColumnIndex(DatabaseHandler.CONTACT));
                         SyncContact contact = (SyncContact)Serializer.deserializeObject(b);
-                        syncContacts.add(contact);
+                        if( contact != null ) {
+                            syncContacts.add(contact);
+                        }
                     }
                     cursor.close();
                     db.close();
@@ -310,7 +323,7 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
         ListView lv = ((ListView)findViewById(R.id.lv));
 
         //задаём данные для списка, т.е. чем список будет заполняться
-        ListItemArrayAdapter adapter = new ListItemArrayAdapter(this, friends);
+        adapter = new ListItemArrayAdapter(this, friends);
         lv.setAdapter(adapter);
 
         //если пользователь кликает на какой-либо элемент списка, то предоставить подробную информацию о данном пользователе
@@ -318,7 +331,13 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Получаем Contact соответствующий выбранному пользователю ВК
-                Contact selectedContact = friends.get(i);
+                if( i >= ListItemArrayAdapter.filteredContactsInfo.size() ) {
+                    return;
+                }
+                Contact selectedContact = ListItemArrayAdapter.filteredContactsInfo.get(i);
+                if( selectedContact == null ) {
+                    return;
+                }
 
                 //Формируем параметры для другой Activity(для отображения подробной информации о пользователе ВК
                 Intent intent = new Intent(MainActivity.this, FriendInfoActivity.class);
@@ -329,6 +348,25 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
                 }
                 //открыть ещё одну Activity, FriendInfoActivity
                 startActivity(intent);
+            }
+        });
+
+        ((TextView)findViewById(R.id.search_field)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                if (charSequence.toString().equals(" ") ) {
+                    adapter.getFilter().filter(charSequence);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
     }
@@ -389,6 +427,14 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
         request.executeAsync();
     }
 
+    //вызов номера телефона
+    private void startDialActivity(String phone){
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phone));
+        startActivity(intent);
+    }
+
+
     //Отобразить синхронизированный список контактов(пока только с ВК)
     private void makePhonebook() {
         this.setTitle("Телефонная книга");
@@ -401,10 +447,12 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
 
             //просто выводим весь список контактов с устройства
             //заполняем синхронизированный список контактов только именами контактов с устройства
-            Queue<String> phoneContacts = phonebook.getContactNames();
+            Queue< Pair<String, String> > phoneContacts = phonebook.getContactNames();
             while( !phoneContacts.isEmpty() ) {
-                String pbName = phoneContacts.remove();
-                SyncContact item = new SyncContact(pbName, null, null);
+                Pair <String, String> pbContact = phoneContacts.remove();
+
+                SyncContact item = new SyncContact(pbContact.first, null, null);
+                item.setPhonebookMobileNumber(pbContact.second);
                 syncContacts.add(item);
             }
         }
@@ -412,6 +460,42 @@ public class MainActivity extends FragmentActivity implements AsyncTaskListener 
         ContactArrayAdapter adapter = new ContactArrayAdapter(this, syncContacts, bitmapCache);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(null);
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if( i >= ContactArrayAdapter.filteredContactsInfo.size() ) {
+                    return false;
+
+                }
+                SyncContact contact = ContactArrayAdapter.filteredContactsInfo.get(i);
+                String phoneNumber = contact.getCorrectPhoneNumber();
+                if( phoneNumber.length() != 0 ) {
+                    startDialActivity(phoneNumber);
+                }
+
+                return false;
+            }
+        });
+
+        ((TextView)findViewById(R.id.search_field)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                if (charSequence.toString().equals(" ") ) {
+                    pbAdapter.getFilter().filter(charSequence);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void showSettings() {

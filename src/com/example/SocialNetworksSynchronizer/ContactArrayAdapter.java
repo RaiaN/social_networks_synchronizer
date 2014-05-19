@@ -7,12 +7,10 @@ import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import android.widget.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 //Данный класс служить для отображения синхронизированного списка друзей, т.к. этот список намного сложнее по своей
@@ -20,10 +18,11 @@ import java.util.ArrayList;
 //Поэтому возникает необходимость использовать данный класс для корректного отображения информации
 
 //Является потомком класса ArrayAdapter (который используется по умолчанию для отображения элементов ListView)
-public class ContactArrayAdapter extends ArrayAdapter<SyncContact> {
+public class ContactArrayAdapter extends ArrayAdapter<SyncContact> implements Filterable{
     private final Context context;
     private final ArrayList<SyncContact> contactsInfo;
     private final LruCache<String, Bitmap> bitmapCache;
+    public static ArrayList<SyncContact> filteredContactsInfo = new ArrayList<SyncContact>();
 
     private class ViewHolder {
         public TextView pbName;
@@ -53,6 +52,7 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> {
 
         this.context = context;
         this.contactsInfo = contactsInfo;
+        filteredContactsInfo = contactsInfo;
         this.bitmapCache = bitmapCache;
     }
 
@@ -79,26 +79,33 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> {
             holder = (ViewHolder)view.getTag();
         }
 
-        //задаём значение для трёх TextView
-        holder.pbName.setText(contactsInfo.get(position).getPhonebookName());
+        if( position < filteredContactsInfo.size() ) {
+            //задаём значение для трёх TextView
+            holder.pbName.setText(contactsInfo.get(position).getPhonebookName());
 
-        Contact vkContact = contactsInfo.get(position).getVkContact();
-        Contact fbContact = contactsInfo.get(position).getFbContact();
+            Contact vkContact = contactsInfo.get(position).getVkContact();
+            Contact fbContact = contactsInfo.get(position).getFbContact();
 
-        if( vkContact != null ) {
-            holder.vkName.setText(contactsInfo.get(position).getVkName());
-            setImage(vkContact, holder.vkImage);
+            if( vkContact != null ) {
+                holder.vkName.setText(contactsInfo.get(position).getVkName());
+                setImage(vkContact, holder.vkImage);
+            } else {
+                holder.vkName.setText("");
+                holder.vkImage.setImageDrawable(context.getResources().getDrawable( R.drawable.vke_icon));
+            }
+
+            if( fbContact != null ) {
+                holder.fbName.setText(contactsInfo.get(position).getFbName());
+                setImage(fbContact, holder.fbImage);
+            } else {
+                holder.fbName.setText("");
+                holder.fbImage.setImageDrawable(context.getResources().getDrawable( R.drawable.fb_icon));
+            }
         } else {
-            holder.vkName.setText("");
-            holder.vkImage.setImageDrawable(context.getResources().getDrawable( R.drawable.vke_icon));
-        }
-
-        if( fbContact != null ) {
-            holder.fbName.setText(contactsInfo.get(position).getFbName());
-            setImage(fbContact, holder.fbImage);
-        } else {
-            holder.fbName.setText("");
-            holder.fbImage.setImageDrawable(context.getResources().getDrawable( R.drawable.fb_icon));
+            holder.pbName.setText("");
+            holder.pbImage.setImageDrawable(null);
+            holder.vkImage.setImageDrawable(null);
+            holder.pbImage.setImageDrawable(null);
         }
 
         return view;
@@ -119,5 +126,51 @@ public class ContactArrayAdapter extends ArrayAdapter<SyncContact> {
                 }
             }
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                List<SyncContact> filteredContacts = new ArrayList<SyncContact>();
+
+                // perform your search here using the searchConstraint String.
+
+                constraint = constraint.toString().toLowerCase();
+                for( SyncContact contact: contactsInfo ) {
+                    String pbName = contact.getPhonebookName();
+                    String vkName = "";
+                    String fbName = "";
+                    if( contact.getVkContact() != null ) {
+                        vkName = contact.getVkContact().getName();
+                    }
+                    if( contact.getFbContact() != null ) {
+                        fbName = contact.getFbContact().getName();
+                    }
+                    if( pbName.toLowerCase().startsWith(constraint.toString()) ||
+                        vkName.toLowerCase().startsWith(constraint.toString()) ||
+                        fbName.toLowerCase().startsWith(constraint.toString()) )
+                    {
+                        filteredContacts.add(contact);
+                    }
+                }
+
+                results.count = filteredContacts.size();
+                results.values = filteredContacts;
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredContactsInfo = (ArrayList<SyncContact>)filterResults.values;
+
+                notifyDataSetChanged();
+            }
+        };
+
+        return filter;
     }
 }

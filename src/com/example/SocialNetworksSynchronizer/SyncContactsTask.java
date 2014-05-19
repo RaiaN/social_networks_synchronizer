@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.util.Pair;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.vk.sdk.api.VKRequest;
@@ -72,6 +73,7 @@ public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
             fbTask.get();
         } catch( Exception e ) {
             e.printStackTrace();
+            return null;
         }
 
         fillSyncContactsList();
@@ -132,7 +134,7 @@ public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
         boolean []fbNamesUsed = new boolean[fbNames.size()];
         Arrays.fill(fbNamesUsed, false);
 
-        Queue<String> phonebookNames = phonebook.getContactNames();
+        Queue< Pair<String, String> > phonebookNames = phonebook.getContactNames();
         syncContacts.clear();
 
         Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -148,9 +150,12 @@ public class SyncContactsTask extends AsyncTask<Void, Void, Void> {
             SyncContact item = new SyncContact();
 
             //получить текущее имя контакта с телефона
-            String currentName = phonebookNames.remove();
-            //добавить его в item
+            Pair <String, String> pbItem = phonebookNames.remove();
+            String currentName = pbItem.first;
+            String currentNumber = pbItem.second;
+            //добавить его в se
             item.setPhonebookName(currentName);
+            item.setPhonebookMobileNumber(currentNumber);
 
             int pos = findSimilarContact(currentName, vkNames);
             if( pos != -1 ) {
