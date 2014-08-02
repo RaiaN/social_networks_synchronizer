@@ -17,17 +17,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="815071f9-a89d-44f7-b22c-ba0c12e39eec" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/help_dialog_layout.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable/phonebook_contact_border.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Requests.java" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Requests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SettingsActivity.java" afterPath="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SettingsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main_layout.xml" afterPath="$PROJECT_DIR$/res/layout/main_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/phonebook_contact.xml" afterPath="$PROJECT_DIR$/res/layout/phonebook_contact.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/rounded_edittext.xml" afterPath="$PROJECT_DIR$/res/drawable/rounded_edittext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/settings_layout.xml" afterPath="$PROJECT_DIR$/res/layout/settings_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="DELETED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\CacheImageDownloader.java" afterPath="" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\AsyncTaskListener.java" afterPath="$PROJECT_DIR$/src/sns/AsyncTaskListener.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\Contact.java" afterPath="$PROJECT_DIR$/src/sns/Contact.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\ContactArrayAdapter.java" afterPath="$PROJECT_DIR$/src/sns/ContactArrayAdapter.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\DatabaseHandler.java" afterPath="$PROJECT_DIR$/src/sns/DatabaseHandler.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\FriendInfoActivity.java" afterPath="$PROJECT_DIR$/src/sns/FriendInfoActivity.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\FriendInfoArrayAdapter.java" afterPath="$PROJECT_DIR$/src/sns/FriendInfoArrayAdapter.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\ListItemArrayAdapter.java" afterPath="$PROJECT_DIR$/src/sns/ListItemArrayAdapter.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\MainActivity.java" afterPath="$PROJECT_DIR$/src/sns/MainActivity.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\ParseFbResponseTask.java" afterPath="$PROJECT_DIR$/src/sns/ParseFbResponseTask.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\ParseResponseTask.java" afterPath="$PROJECT_DIR$/src/sns/ParseResponseTask.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\ParseVkResponseTask.java" afterPath="$PROJECT_DIR$/src/sns/ParseVkResponseTask.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\Phonebook.java" afterPath="$PROJECT_DIR$/src/sns/Phonebook.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\Requests.java" afterPath="$PROJECT_DIR$/src/sns/Requests.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\Serializer.java" afterPath="$PROJECT_DIR$/src/sns/Serializer.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\SettingsActivity.java" afterPath="$PROJECT_DIR$/src/sns/SettingsActivity.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\SyncContact.java" afterPath="$PROJECT_DIR$/src/sns/SyncContact.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\SyncContactsTask.java" afterPath="$PROJECT_DIR$/src/sns/SyncContactsTask.java" />
+      <change type="MOVED" beforePath="C:\IdeaProjects\SNS\src\com\example\SocialNetworksSynchronizer\Translit.java" afterPath="$PROJECT_DIR$/src/sns/Translit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/example/SocialNetworksSynchronizer/BuildConfig.java" afterPath="$PROJECT_DIR$/gen/com/example/SocialNetworksSynchronizer/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/facebook_sdk/gen/com/facebook/android/BuildConfig.java" afterPath="$PROJECT_DIR$/libs/facebook_sdk/gen/com/facebook/android/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/vksdk_library/src/main/gen/com/vk/sdk/BuildConfig.java" afterPath="$PROJECT_DIR$/libs/vksdk_library/src/main/gen/com/vk/sdk/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SocialNetworksSynchronizer.iml" afterPath="$PROJECT_DIR$/SocialNetworksSynchronizer.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialNetworksSynchronizer.iws" />
@@ -46,7 +60,24 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" line="184" class="com.example.SocialNetworksSynchronizer.MainActivity" package="com.example.SocialNetworksSynchronizer">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
@@ -82,26 +113,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" line="184" class="com.example.SocialNetworksSynchronizer.MainActivity" package="com.example.SocialNetworksSynchronizer">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
-    <breakpoint_rules />
-    <ui_properties />
+    <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -109,36 +122,121 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
+      <file leaf-file-name="ParseFbResponseTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/ParseFbResponseTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="521" column="38" selection-start="19127" selection-end="19127" vertical-scroll-proportion="0.0" vertical-offset="8139" max-vertical-offset="8976">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785">
+              <caret line="64" column="31" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
               <folding>
-                <element signature="e#7989#8025#0" expanded="true" />
-                <element signature="e#19127#19753#0" expanded="true" />
-                <element signature="e#19742#19743#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="phonebook_contact.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/res/layout/phonebook_contact.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
+      <file leaf-file-name="ParseResponseTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/ParseResponseTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="40" selection-start="1491" selection-end="1491" vertical-scroll-proportion="1.2289157" vertical-offset="0" max-vertical-offset="1479">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="1275">
+              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="phonebook_contact_border.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/drawable/phonebook_contact_border.xml">
+      <file leaf-file-name="ParseVkResponseTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/ParseVkResponseTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="39" selection-start="185" selection-end="185" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3264">
+              <caret line="9" column="60" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Phonebook.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/Phonebook.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
+              <caret line="56" column="69" selection-start-line="56" selection-start-column="69" selection-end-line="56" selection-end-column="69" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Requests.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/Requests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1394">
+              <caret line="47" column="88" selection-start-line="47" selection-start-column="88" selection-end-line="47" selection-end-column="88" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Serializer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/Serializer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingsActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/SettingsActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1938">
+              <caret line="102" column="26" selection-start-line="102" selection-start-column="26" selection-end-line="102" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SyncContact.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/SyncContact.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
+              <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+              <folding>
+                <element signature="method#getVkName#0;class#SyncContact#0" expanded="false" />
+                <element signature="method#getFbName#0;class#SyncContact#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SyncContactsTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sns/SyncContactsTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3706">
+              <caret line="212" column="9" selection-start-line="212" selection-start-column="9" selection-end-line="212" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Translit.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sns/Translit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.14529915" vertical-offset="0" max-vertical-offset="2839">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -161,8 +259,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/layout/window_title.xml" />
-        <option value="$PROJECT_DIR$/res/values/custom_title.xml" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/VkContact.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactItem.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FbContact.java" />
@@ -206,12 +302,14 @@
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/main_layout.xml" />
         <option value="$PROJECT_DIR$/res/drawable/rounded_edittext.xml" />
-        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java" />
         <option value="$PROJECT_DIR$/res/layout/weq.xml" />
         <option value="$PROJECT_DIR$/res/layout/ds.xml" />
         <option value="$PROJECT_DIR$/res/drawable/phonebook_contact_border.xml" />
         <option value="$PROJECT_DIR$/res/layout/phonebook_contact.xml" />
+        <option value="$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java" />
+        <option value="$PROJECT_DIR$/SocialNetworksSynchronizer.iml" />
+        <option value="$PROJECT_DIR$/src/sns/AsyncTaskListener.java" />
       </list>
     </option>
   </component>
@@ -219,7 +317,7 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
-    <option name="height" value="754" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -254,7 +352,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -266,7 +364,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -282,8 +379,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SocialNetworksSynchronizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="SNS" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -292,30 +389,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SocialNetworksSynchronizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="SNS" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SocialNetworksSynchronizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SocialNetworksSynchronizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SocialNetworksSynchronizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="sns" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -324,38 +407,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SocialNetworksSynchronizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="SNS" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SocialNetworksSynchronizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SocialNetworksSynchronizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -372,7 +434,7 @@
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/universal-image-loader-1.9.1-with-sources.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
@@ -393,7 +455,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Android Application.SocialNetworksSynchronizer">
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
@@ -417,6 +479,7 @@
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -425,19 +488,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -465,6 +515,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -518,6 +581,7 @@
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="false" name="SocialNetworksSynchronizer" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -537,6 +601,7 @@
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <RunnerSettings RunnerId="AndroidDebugRunner" />
       <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <method />
@@ -555,22 +620,8 @@
       <AnalysisUIOptions />
     </option>
   </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -646,7 +697,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -655,15 +706,14 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32932332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25771606" sideWeight="0.61346996" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.032407407" sideWeight="0.15373352" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20833333" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15277778" sideWeight="0.84626645" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20754717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20754717" sideWeight="0.84626645" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -674,11 +724,15 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
   </component>
@@ -703,242 +757,73 @@
     <option name="LAST_COMMIT_MESSAGE" value="1) При работе с Phonebook при помощи длительного клика можно набрать номер телефона, если он доступен&#10;2) Добавлены фильтры для ListView быстрого поиска контакта" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/sns/MainActivity.java</url>
+          <line>165</line>
+          <properties />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/sns/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10251">
+          <caret line="521" column="38" selection-start-line="521" selection-start-column="38" selection-end-line="521" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/phonebook_contact.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1479">
+          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/phonebook_contact_border.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="221">
+          <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="39" selection-start="355" selection-end="355" vertical-scroll-proportion="0.15809524" vertical-offset="87" max-vertical-offset="612">
+        <state vertical-scroll-proportion="0.15809524" vertical-offset="87" max-vertical-offset="612">
+          <caret line="10" column="39" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/vksdk_library/src/main/java/com/vk/sdk/VKSdk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="367" column="0" selection-start="12967" selection-end="12967" vertical-scroll-proportion="0.5048544" vertical-offset="5488" max-vertical-offset="5797">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/AsyncTaskListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="12" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Translit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="31" selection-start="3685" selection-end="3685" vertical-scroll-proportion="4.389497" vertical-offset="0" max-vertical-offset="2839">
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#188#204#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/content/Intent.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="340" column="28" selection-start="26004" selection-end="26004" vertical-scroll-proportion="0.33333334" vertical-offset="5631" max-vertical-offset="9418" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/content/Context.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="41" selection-start="2250" selection-end="2250" vertical-scroll-proportion="0.33333334" vertical-offset="616" max-vertical-offset="5100" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/CacheImageDownloader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="270" selection-end="270" vertical-scroll-proportion="0.24938875" vertical-offset="0" max-vertical-offset="409">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/Filterable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="161" selection-end="161" vertical-scroll-proportion="0.16441005" vertical-offset="0" max-vertical-offset="517" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/ListView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="25" selection-start="267" selection-end="267" vertical-scroll-proportion="-0.027914613" vertical-offset="136" max-vertical-offset="2278">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ParseResponseTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="19" selection-start="1521" selection-end="1521" vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="1207">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/ArrayAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="16" selection-start="1378" selection-end="1378" vertical-scroll-proportion="0.33271375" vertical-offset="331" max-vertical-offset="1037">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/java/lang/String.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="19" selection-start="4251" selection-end="4251" vertical-scroll-proportion="0.33271375" vertical-offset="1691" max-vertical-offset="3145">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/TextView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="418" column="19" selection-start="17072" selection-end="17072" vertical-scroll-proportion="0.33333334" vertical-offset="6978" max-vertical-offset="8976">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/Filter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/BaseAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="16" selection-start="656" selection-end="656" vertical-scroll-proportion="0.33236995" vertical-offset="157" max-vertical-offset="595">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/view/View.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1132" column="28" selection-start="51491" selection-end="51491" vertical-scroll-proportion="0.33271375" vertical-offset="19048" max-vertical-offset="20196">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/DatabaseHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="191" selection-end="191" vertical-scroll-proportion="0.04989605" vertical-offset="78" max-vertical-offset="731">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/content/ContentResolver.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="41" selection-start="2139" selection-end="2139" vertical-scroll-proportion="0.33333334" vertical-offset="578" max-vertical-offset="2771">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/net/Uri.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="34" selection-start="1898" selection-end="1898" vertical-scroll-proportion="0.33213645" vertical-offset="886" max-vertical-offset="2244">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/java/lang/Character.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="158" selection-end="158" vertical-scroll-proportion="0.18123667" vertical-offset="0" max-vertical-offset="8432">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="78" selection-start="317" selection-end="317" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/widget/AbsListView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="19" selection-start="1818" selection-end="1818" vertical-scroll-proportion="0.3320158" vertical-offset="562" max-vertical-offset="5440">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Serializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="37" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="49" max-vertical-offset="731">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/provider/ContactsContract.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="358" column="48" selection-start="21062" selection-end="21062" vertical-scroll-proportion="0.33238637" vertical-offset="5952" max-vertical-offset="15317">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Phonebook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="69" selection-start="2230" selection-end="2230" vertical-scroll-proportion="0.0" vertical-offset="729" max-vertical-offset="1394">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1513#1535#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContactsTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="212" column="9" selection-start="7384" selection-end="7384" vertical-scroll-proportion="0.41264558" vertical-offset="3084" max-vertical-offset="3706">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4206#4214#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SyncContact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="5" selection-start="1239" selection-end="1239" vertical-scroll-proportion="0.20133111" vertical-offset="406" max-vertical-offset="1394">
-          <folding>
-            <element signature="method#getVkName#0;class#SyncContact#0" expanded="false" />
-            <element signature="method#getFbName#0;class#SyncContact#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ParseVkResponseTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="60" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="2805" max-vertical-offset="3298">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ParseFbResponseTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="31" selection-start="1817" selection-end="1818" vertical-scroll-proportion="0.0" vertical-offset="913" max-vertical-offset="1785">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/webkit/WebView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="16" selection-start="2768" selection-end="2768" vertical-scroll-proportion="0.33333334" vertical-offset="851" max-vertical-offset="6630">
-          <folding />
+        <state vertical-scroll-proportion="0.5048544" vertical-offset="5488" max-vertical-offset="5797">
+          <caret line="367" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gen/com/example/SocialNetworksSynchronizer/R.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="550">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="550">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -947,21 +832,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="50" selection-start="418" selection-end="418" vertical-scroll-proportion="0.49853373" vertical-offset="0" max-vertical-offset="341">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/text/Html.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="39" selection-start="237" selection-end="237" vertical-scroll-proportion="0.38526914" vertical-offset="0" max-vertical-offset="493">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/MyProject/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-19/android.jar!/android/app/Activity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="29" selection-start="4252" selection-end="4252" vertical-scroll-proportion="0.3325792" vertical-offset="1757" max-vertical-offset="7565">
+        <state vertical-scroll-proportion="0.49853373" vertical-offset="0" max-vertical-offset="341">
+          <caret line="10" column="50" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -971,7 +843,8 @@
         <state />
       </provider>
       <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="453">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="453">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -981,25 +854,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="41" selection-start="316" selection-end="316" vertical-scroll-proportion="0.30022076" vertical-offset="0" max-vertical-offset="561">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Contact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="31" selection-start="893" selection-end="893" vertical-scroll-proportion="-1.2405858" vertical-offset="933" max-vertical-offset="1411">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getAllInfo#0;class#Contact#0" expanded="false" />
-            <element signature="e#3707#3715#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/Requests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="88" selection-start="2118" selection-end="2118" vertical-scroll-proportion="-0.24476987" vertical-offset="729" max-vertical-offset="1207">
+        <state vertical-scroll-proportion="0.30022076" vertical-offset="0" max-vertical-offset="561">
+          <caret line="8" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1009,111 +865,43 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="38" selection-start="297" selection-end="297" vertical-scroll-proportion="0.22516556" vertical-offset="0" max-vertical-offset="2125">
+        <state vertical-scroll-proportion="0.22516556" vertical-offset="0" max-vertical-offset="2125">
+          <caret line="6" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#757#781#0" expanded="true" />
-            <element signature="e#1112#1130#0" expanded="true" />
-            <element signature="e#1528#1545#0" expanded="true" />
-            <element signature="e#1949#1972#0" expanded="true" />
-            <element signature="e#2371#2389#0" expanded="true" />
-            <element signature="e#2789#2808#0" expanded="true" />
-            <element signature="e#3452#3476#0" expanded="true" />
-            <element signature="e#3810#3828#0" expanded="true" />
-            <element signature="e#4229#4246#0" expanded="true" />
-            <element signature="e#4649#4668#0" expanded="true" />
-            <element signature="e#5144#5159#0" expanded="true" />
+            <element signature="e#757#781#0" expanded="false" />
+            <element signature="e#1112#1130#0" expanded="false" />
+            <element signature="e#1528#1545#0" expanded="false" />
+            <element signature="e#1949#1972#0" expanded="false" />
+            <element signature="e#2371#2389#0" expanded="false" />
+            <element signature="e#2789#2808#0" expanded="false" />
+            <element signature="e#3452#3476#0" expanded="false" />
+            <element signature="e#3810#3828#0" expanded="false" />
+            <element signature="e#4229#4246#0" expanded="false" />
+            <element signature="e#4649#4668#0" expanded="false" />
+            <element signature="e#5144#5159#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="26" selection-start="3785" selection-end="3785" vertical-scroll-proportion="0.0" vertical-offset="1120" max-vertical-offset="1751">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FriendInfoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="71" selection-start="1542" selection-end="1550" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1088">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/FriendInfoArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="32" selection-start="1172" selection-end="1192" vertical-scroll-proportion="1.0669456" vertical-offset="0" max-vertical-offset="782">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="43" selection-start="1716" selection-end="1716" vertical-scroll-proportion="0.0" vertical-offset="215" max-vertical-offset="765">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ListItemArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="21" selection-start="4306" selection-end="4306" vertical-scroll-proportion="3.4521072" vertical-offset="0" max-vertical-offset="2159">
-          <folding>
-            <element signature="e#654#663#0" expanded="true" />
-            <element signature="e#3683#3692#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main_layout.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="27" column="28" selection-start="1198" selection-end="1198" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="2278">
+        <state vertical-scroll-proportion="0.0" vertical-offset="215" max-vertical-offset="765">
+          <caret line="33" column="43" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable/rounded_edittext.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="16" selection-start="405" selection-end="405" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/ContactArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="0" selection-start="6518" selection-end="6518" vertical-scroll-proportion="0.35096154" vertical-offset="2540" max-vertical-offset="3162">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1034#1047#0" expanded="true" />
-            <element signature="e#5493#5506#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SocialNetworksSynchronizer/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="521" column="38" selection-start="19127" selection-end="19127" vertical-scroll-proportion="0.0" vertical-offset="8139" max-vertical-offset="8976">
-          <folding>
-            <element signature="e#7989#8025#0" expanded="true" />
-            <element signature="e#19127#19753#0" expanded="true" />
-            <element signature="e#19742#19743#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <caret line="8" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable/rect.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="6" selection-start="140" selection-end="140" vertical-scroll-proportion="0.06500956" vertical-offset="0" max-vertical-offset="523">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable/phonebook_contact_border.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="39" selection-start="185" selection-end="185" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-          <folding />
+        <state vertical-scroll-proportion="0.06500956" vertical-offset="0" max-vertical-offset="523">
+          <caret line="2" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1122,8 +910,250 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="40" selection-start="1491" selection-end="1491" vertical-scroll-proportion="1.2289157" vertical-offset="0" max-vertical-offset="1479">
+        <state vertical-scroll-proportion="0.037037037" vertical-offset="612" max-vertical-offset="1479">
+          <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/phonebook_contact_border.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17489712" vertical-offset="0" max-vertical-offset="486">
+          <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1203" max-vertical-offset="1666">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ant.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="646">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8066037" vertical-offset="1632" max-vertical-offset="2278">
+          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SocialNetworksSynchronizer.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/AsyncTaskListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/Contact.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1411">
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getAllInfo#0;class#Contact#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/ContactArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3145">
+          <caret line="158" column="0" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/DatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/FriendInfoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4" max-vertical-offset="1241">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/FriendInfoArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+          <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/ListItemArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2346">
+          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1491" max-vertical-offset="8976">
+          <caret line="121" column="42" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/ParseFbResponseTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785">
+          <caret line="64" column="31" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/ParseResponseTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="1275">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/ParseVkResponseTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3264">
+          <caret line="9" column="60" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/Phonebook.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
+          <caret line="56" column="69" selection-start-line="56" selection-start-column="69" selection-end-line="56" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/Requests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1394">
+          <caret line="47" column="88" selection-start-line="47" selection-start-column="88" selection-end-line="47" selection-end-column="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/Serializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1938">
+          <caret line="102" column="26" selection-start-line="102" selection-start-column="26" selection-end-line="102" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/SyncContact.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding>
+            <element signature="method#getVkName#0;class#SyncContact#0" expanded="false" />
+            <element signature="method#getFbName#0;class#SyncContact#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/SyncContactsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3706">
+          <caret line="212" column="9" selection-start-line="212" selection-start-column="9" selection-end-line="212" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sns/Translit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14529915" vertical-offset="0" max-vertical-offset="2839">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1144,7 +1174,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Android (SocialNetworksSynchronizer)|Android</last-edited>
+          <last-edited>Detection</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1184,6 +1214,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
